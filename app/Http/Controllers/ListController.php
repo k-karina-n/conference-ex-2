@@ -15,7 +15,6 @@ class ListController extends Controller
     public function index(): View
     {
         //?show description and country 
-        //*edit pagination button view 
 
         return view('list', [
             'conferences' => Conference::with('user')->orderBy('date')->latest()->paginate(10),

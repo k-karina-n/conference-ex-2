@@ -16,8 +16,8 @@
         <div class="max-w-xl mx-auto">
             <div class="text-center">
 
-{{--                 <div id="parent-div">
- --}}                    @include('registrationPartials/register')
+                <div id="parent-div">
+                    @include('registrationPartials/register')
                 </div>
 
             </div>

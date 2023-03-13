@@ -6,14 +6,13 @@
     Fill in the conference registration form
 </p>
 
-{{-- <div hx-target="#parent-div" hx-swap="innerHTML">
- --}}    <div class="mt-12">
+    <div class="mt-12">
         <div class="mt-5 md:col-span-2 md:mt-0">
             <div class="overflow-hidden shadow sm:rounded-md">
                 <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
                     <div class="grid gap-4 lg:gap-6">
 
-                        <form hx-post="/" hx-trigger="submit" enctype="multipart/form-data">
+                        <form hx-post="/" hx-trigger="submit" hx-target="#parent-div" hx-swap="innerHTML" enctype="multipart/form-data">
                             @csrf
                             <div x-data="{ 
                                 form: { 
@@ -150,4 +149,3 @@
             </div>
         </div>
     </div>
-</div>

@@ -7,8 +7,10 @@ use Illuminate\Support\Facades\Route;
 Route::resource('/', RegistrationFormController::class)
     ->only(['index', 'store']);
 
+Route::view('/editForm', 'registrationPartials/register');
+
 Route::get('/list', [ListController::class, 'index']);
 
-Route::resource('/list/auth', ListController::class)
-    ->only(['create', 'edit', 'destroy']);
+/* Route::resource('/list/auth', ListController::class)
+    ->only(['create', 'edit', 'destroy']); */
 /* для авторизованных ->middleware(['auth', 'verified']); */
