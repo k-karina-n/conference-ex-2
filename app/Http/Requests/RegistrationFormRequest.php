@@ -21,7 +21,8 @@ class RegistrationFormRequest extends FormRequest
             'email' => 'required|email|unique:users',
             'country' => 'required',
 
-            'file' => 'required|mimes:png,jpg,jpeg|max:2048'
+            'file' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'date' => 'required|date|after:yesterday'
         ];
     }
 }

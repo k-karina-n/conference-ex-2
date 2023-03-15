@@ -18,9 +18,9 @@ class RegistrationFormController extends Controller
      */
     public function store(RegistrationFormRequest $request, RegistrationFormService $service): View
     {
-        $service->store($request);
-
-        $title = ucwords($_POST['title']);
+        /*         $service->store($request);
+ */
+        $title = ucwords($request->input('title'));
 
         return view('registrationPartials/congratulation', compact('title'));
     }

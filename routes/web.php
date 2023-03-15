@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\RegistrationFormController;
-use App\Http\Controllers\ListController;
+use App\Http\Controllers\ConferenceListController;
 use Illuminate\Support\Facades\Route;
 
 Route::resource('/', RegistrationFormController::class)
@@ -9,7 +9,7 @@ Route::resource('/', RegistrationFormController::class)
 
 Route::view('/editForm', 'registrationPartials/register');
 
-Route::get('/list', [ListController::class, 'index']);
+Route::get('/list', [ConferenceListController::class, 'index']);
 
 /* Route::resource('/list/auth', ListController::class)
     ->only(['create', 'edit', 'destroy']); */

@@ -6,11 +6,13 @@ use Illuminate\View\View;
 use App\Models\Conference;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
+
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\RegistrationFormRequest;
 
 
-class ListController extends Controller
+class ConferenceListController extends Controller
 {
     public function index(): View
     {
