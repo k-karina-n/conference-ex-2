@@ -10,16 +10,21 @@ class RegistrationFormController extends Controller
 {
     public function index(): View
     {
-        return view('registrationForm');
+        return view('registration-form');
     }
 
     /**
-     * Store information from Registration Form to DB
+     * Store info from registration form to DB
+     * 
+     * @param
+     * 
+     * $RegistrationFormRequest - validated data
+     * $RegistrationFormService - store data to DB
      */
     public function store(RegistrationFormRequest $request, RegistrationFormService $service): View
     {
-        /*         $service->store($request);
- */
+        $service->store($request);
+
         $title = ucwords($request->input('title'));
 
         return view('registrationPartials/congratulation', compact('title'));

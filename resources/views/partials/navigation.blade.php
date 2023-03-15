@@ -11,7 +11,9 @@
                         <!--active 'bg-gray-900 text-white' passive 'text-gray-300'  -->
                         <a href="/" class="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base text-white font-medium">Registration Form</a>
 
-                        <a href="/list" class="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base text-white font-medium">Conference List</a>
+                        <a href="/conference_list" class="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base text-white font-medium">Conference List</a>
+
+                        <a href="/sign_in" class="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base text-white font-medium">Sign in</a>
 
                     </div>
                 </div>

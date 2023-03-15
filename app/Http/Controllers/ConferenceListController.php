@@ -18,7 +18,7 @@ class ConferenceListController extends Controller
     {
         //?show description and country 
 
-        return view('list', [
+        return view('conference-list', [
             'conferences' => Conference::with('user')->orderBy('date')->latest()->paginate(10),
         ]);
     }

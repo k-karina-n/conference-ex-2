@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class RegistrationFormRequest extends FormRequest
 {
-    protected $redirect = '/editForm';
+    protected $redirect = '/edit_form';
     /**
      * Get the validation rules that apply to the request.
      *
