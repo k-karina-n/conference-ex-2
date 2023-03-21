@@ -4,9 +4,17 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegistrationFormRequest extends FormRequest
+class ConferenceRequest extends FormRequest
 {
-    protected $redirect = '/edit_form';
+    protected $redirect = '/add_speaker';
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -15,13 +23,8 @@ class RegistrationFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'firstName' => 'required|string|max:255',
-            'lastName' => 'required|string|max:255',
-            'phone' => 'required',
             'email' => 'required|email|unique:users',
-            'country' => 'required',
-
-            'file' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'file' => 'required|mimes:png,jpg,jpeg|max:2048'
         ];
     }
 }

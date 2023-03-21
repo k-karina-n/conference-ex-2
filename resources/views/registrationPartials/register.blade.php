@@ -91,7 +91,7 @@
                                         file:bg-transparent file:border-0
                                         file:bg-gray-100 file:mr-4
                                         file:py-3 file:px-4
-                                       " {{-- required --}}>
+                                       " required>
                                         </div>
 
                                         <div class="mt-2 space-y-2">
