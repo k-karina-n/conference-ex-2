@@ -13,6 +13,7 @@ use App\Http\Controllers\AdminAccessController;
 Route::resource('/', RegistrationFormController::class)
     ->only(['index', 'store']);
 
+// redirect to '/edit_form' in case of failed validation
 Route::view('/edit_form', 'registrationPartials/register');
 
 /*

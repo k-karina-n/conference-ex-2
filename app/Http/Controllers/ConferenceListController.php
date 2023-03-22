@@ -10,7 +10,6 @@ use App\Services\RegistrationFormService;
 
 
 use Illuminate\Http\Request;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Http\RedirectResponse;
 
 
@@ -21,25 +20,10 @@ class ConferenceListController extends Controller
      */
     public function index(): View
     {
-        $date = date('Y-m-d');
-
         return view('conference-list', [
-            'conferences' => Conference::with('user')
-                ->paginate(5),
+            'conferences' => Conference::with('user')->paginate(5),
         ]);
     }
-
-    /*     public function table(): View
-    {
-        $date = date('Y-m-d');
-
-        return view('table-body', [
-            'conferences' => Conference::where('date', '>=', $date)
-                ->with('user')
-                ->orderBy('date')
-                ->paginate(5),
-        ]);
-    } */
 
     /* [ Functuanility for auth user only ] */
 

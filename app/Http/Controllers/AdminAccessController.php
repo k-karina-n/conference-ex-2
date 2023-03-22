@@ -3,21 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\AdminAccessRequest;
+
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 
 
 class AdminAccessController extends Controller
 {
-    public function signIn(Request $request)
+    public function signIn(AdminAccessRequest $request)
     {
-        $credentials = $request->validate([
-            'email' => 'required|email|exists:admins,email',
-            'password' => 'required'
-        ]);
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password
+        ];
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect('/conference_list')->with('success', 'Welcome!');
+            return redirect('/conference_list')->with('success', 'Welcome to Admin Mode!');
         }
 
         return back()->withErrors([
@@ -25,7 +28,7 @@ class AdminAccessController extends Controller
         ]);
     }
 
-    public function signOut(Request $request)
+    public function signOut(Request $request): RedirectResponse
     {
         auth()->logout();
 
