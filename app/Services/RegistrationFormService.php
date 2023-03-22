@@ -12,19 +12,17 @@ class RegistrationFormService
 
         $request->file->move(public_path('userPhotos'), $photoPath);
 
-        $user = User::create([
-            'firstName' => ucfirst($request->input('firstName')),
-            'lastName' => ucfirst($request->input('lastName')),
-            'phone' => $request->input('phone'),
-            'email' => $request->input('email'),
-            'country' => $request->input('country'),
+        User::create([
+            'firstName' => ucfirst($request->firstName),
+            'lastName' => ucfirst($request->lastName),
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'country' => $request->country,
             'photo' => $photoPath
-        ]);
-
-        $user->conferences()->create([
-            'title' => ucwords($request->input('title')),
-            'description' => $request->input('description'),
-            'date' => $request->input('date'),
+        ])->conference()->create([
+            'title' => ucwords($request->title),
+            'description' => $request->description,
+            'date' => $request->date,
         ]);
     }
 }

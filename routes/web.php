@@ -7,7 +7,7 @@ use App\Http\Controllers\ConferenceListController;
 use App\Http\Controllers\AdminAccessController;
 
 /*
- Routes: registration form 
+ Routes: Registration Form Section
 */
 
 Route::resource('/', RegistrationFormController::class)
@@ -16,20 +16,22 @@ Route::resource('/', RegistrationFormController::class)
 Route::view('/edit_form', 'registrationPartials/register');
 
 /*
- Routes: conference list 
+ Routes: Conference List Section 
 */
 Route::get('/conference_list', [ConferenceListController::class, 'index']);
-Route::get('/table_body', [ConferenceListController::class, 'table']);
 
 /*
- Routes: admin access
+ Routes: Sign In / Sign Out Section 
 */
 Route::view('/sign_in', 'sign-in')->middleware('guest');
-Route::view('/sign_out', 'sign-out')->middleware(['auth']);
+Route::view('/sign_out', 'sign-out')->middleware('auth');
 
 Route::post('/get_admin_access', [AdminAccessController::class, 'signIn'])->middleware('guest');
-Route::post('/leave_admin_access', [AdminAccessController::class, 'signOut'])->middleware(['auth']);
+Route::post('/leave_admin_access', [AdminAccessController::class, 'signOut'])->middleware('auth');
 
+/*
+ Routes: Admin Functions 
+*/
 Route::view('/add_speaker', 'adminPartials/add');
 Route::get('/edit_speaker/{id}', [ConferenceListController::class, 'edit']);
 

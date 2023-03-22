@@ -22,6 +22,9 @@ class RegistrationFormRequest extends FormRequest
             'country' => 'required',
 
             'file' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'title' => 'required',
+            'description' => 'required|max:1000',
+            'date' => 'required|after_or_equal:today'
         ];
     }
 }
