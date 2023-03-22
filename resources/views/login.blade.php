@@ -10,7 +10,7 @@
                 </div>
 
                 <div class="mt-5">
-                    <form method="POST" action="/get_admin_access">
+                    <form method="POST" action="/login">
                         @csrf
                         <div class="grid gap-y-4">
                             <!-- Form Group -->

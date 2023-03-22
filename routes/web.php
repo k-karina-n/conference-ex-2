@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\RegistrationFormController;
 use App\Http\Controllers\ConferenceListController;
-use App\Http\Controllers\AdminAccessController;
+use App\Http\Controllers\AdminAuthController;
 
 /*
  Routes: Registration Form Section
@@ -13,8 +13,7 @@ use App\Http\Controllers\AdminAccessController;
 Route::resource('/', RegistrationFormController::class)
     ->only(['index', 'store']);
 
-// redirect to '/edit_form' in case of failed validation
-Route::view('/edit_form', 'registrationPartials/register');
+Route::get('/edit', [RegistrationFormController::class, 'edit']);
 
 /*
  Routes: Conference List Section 
@@ -22,13 +21,13 @@ Route::view('/edit_form', 'registrationPartials/register');
 Route::get('/conference_list', [ConferenceListController::class, 'index']);
 
 /*
- Routes: Sign In / Sign Out Section 
+ Routes: Log in/ Log Out Section 
 */
-Route::view('/sign_in', 'sign-in')->middleware('guest');
-Route::view('/sign_out', 'sign-out')->middleware('auth');
+Route::get('/login', [AdminAuthController::class, 'loginView'])->middleware('guest');
+Route::post('/login', [AdminAuthController::class, 'login'])->middleware('guest');
 
-Route::post('/get_admin_access', [AdminAccessController::class, 'signIn'])->middleware('guest');
-Route::post('/leave_admin_access', [AdminAccessController::class, 'signOut'])->middleware('auth');
+Route::get('/logout', [AdminAuthController::class, 'logoutView'])->middleware('auth');
+Route::post('/logout', [AdminAuthController::class, 'logout'])->middleware('auth');
 
 /*
  Routes: Admin Functions 

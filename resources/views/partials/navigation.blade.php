@@ -14,9 +14,9 @@
                         <a href="/conference_list" class="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base text-white font-medium">Conference List</a>
 
                         @auth
-                        <a href="/sign_out" class="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base text-white font-medium">Sign out</a>
+                        <a href="/logout" class="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base text-white font-medium">Log out</a>
                         @else
-                        <a href="/sign_in" class="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base text-white font-medium">Sign in</a>
+                        <a href="/login" class="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base text-white font-medium">Log in</a>
                         @endauth
 
                     </div>

@@ -1,17 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use App\Http\Requests\AdminAccessRequest;
+namespace App\Services;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\RedirectResponse;
 
-
-class AdminAccessController extends Controller
+class AdminAuthService
 {
-    public function signIn(AdminAccessRequest $request)
+    public function auth($request)
     {
         $credentials = [
             'email' => $request->email,
@@ -28,12 +23,11 @@ class AdminAccessController extends Controller
         ]);
     }
 
-    public function signOut(Request $request): RedirectResponse
+    public function logout($request)
     {
         auth()->logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
         return redirect('/conference_list')->with('success', 'Adios');

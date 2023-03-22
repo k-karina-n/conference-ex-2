@@ -33,4 +33,12 @@ class RegistrationFormController extends Controller
 
         return view('registrationPartials/congratulation', compact('title'));
     }
+
+    /**
+     * Return user back in case of failed validation
+     */
+    public function edit(): View
+    {
+        return view('registrationPartials/register');
+    }
 }

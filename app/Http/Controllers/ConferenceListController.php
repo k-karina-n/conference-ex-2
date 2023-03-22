@@ -34,7 +34,7 @@ class ConferenceListController extends Controller
     {
         $service->store($request);
 
-        return redirect('/table_body')->with('success', 'New speaker has been created!');
+        return redirect('/conference_list')->with('success', 'New speaker has been created!');
         //return response('', 200)->header('HX-Location', '/focus');
     }
 
@@ -89,16 +89,16 @@ class ConferenceListController extends Controller
             $user->conference->save();
         }
 
-        return response('', 200)->header('HX-Location', '/conference_list');
+        return redirect('/conference_list')->with('success', 'Speaker has been updated');
     }
 
     /**
      * Remove the specified speaker from DB.
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        /* User::find($id)->delete(); */
+        $user->delete();
 
-        return redirect('/table_body')->with('success', 'Speaker has been deleted');
+        return redirect('/conference_list')->with('success', 'Speaker has been deleted');
     }
 }
