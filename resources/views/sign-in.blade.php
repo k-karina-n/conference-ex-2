@@ -24,7 +24,9 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <p class="hidden text-xs text-red-600 mt-2" id="email-error">Please include a valid email address so we can get back to you</p>
+                                @error('email')
+                                <p class="text-xs text-red-600 mt-2">Please indicate a valid email address</p>
+                                @enderror
                             </div>
                             <!-- End Form Group -->
 
@@ -41,7 +43,9 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <p class="hidden text-xs text-red-600 mt-2" id="password-error">8+ characters required</p>
+                                @error('password')
+                                <p class="text-xs text-red-600 mt-2">{{ $message }}</p>
+                                @enderror
                             </div>
                             <!-- End Form Group -->
 

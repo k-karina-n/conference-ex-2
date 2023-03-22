@@ -1,7 +1,7 @@
 @include('partials/head')
 @include('partials/navigation')
 
-<main id="admin-functions" hx-boost="true">
+<main id="parent-div" hx-boost="true">
 
     <div class="px-6 py-4 md:flex justify-center border-t border-gray-200">
         {{ $conferences->links() }}
@@ -22,7 +22,7 @@
 
                             @auth
                             <div class="inline-flex gap-x-2">
-                                <button hx-get="/add_speaker" hx-trigger="click" hx-target="#admin-functions" class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                                <button hx-get="/add_speaker" hx-trigger="click" hx-target="#parent-div" class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                                     <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                         <path d="M2.63452 7.50001L13.6345 7.5M8.13452 13V2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                                     </svg>
@@ -112,11 +112,10 @@
 
                                     <td class="h-px w-px whitespace-nowrap"></td>
 
-                                    {{-- @auth hx-target="#parent-div" hx-swap="innerHTML" --}}
                                     @php($id = $conference->user->id)
                                     <td class="h-px w-px whitespace-nowrap">
                                         <div class="px-6 py-1.5">
-                                            <button hx-get="/edit_speaker/{{ $id }}" hx-target="#admin-functions" class="inline-flex items-center gap-x-1.5 text-sm text-blue-600 decoration-2 hover:underline font-medium">
+                                            <button hx-get="/edit_speaker/{{ $id }}" hx-target="#parent-div" class="inline-flex items-center gap-x-1.5 text-sm text-blue-600 decoration-2 hover:underline font-medium">
                                                 Edit
                                             </button>
                                         </div>
@@ -124,12 +123,9 @@
 
                                     <td class="h-px w-px whitespace-nowrap">
                                         <div class="px-6 py-1.5">
-                                            <button hx-get="/delete_speaker/{{ $id }}" hx-trigger="click" hx-target="#admin-functions" class="inline-flex items-center gap-x-1.5 text-sm text-blue-600 decoration-2 hover:underline font-medium">
+                                            <button hx-get="/delete_speaker/{{ $id }}" hx-target="#parent-div" class="inline-flex items-center gap-x-1.5 text-sm text-blue-600 decoration-2 hover:underline font-medium">
                                                 Delete
                                             </button>
-
-                                            <x-delete />
-
                                         </div>
                                     </td>
                                     {{-- @endauth --}}
@@ -145,6 +141,7 @@
 
     <!-- Flash message to inform about admin functions -->
     <x-flash />
+
 </main>
 
 @include('partials/footer')

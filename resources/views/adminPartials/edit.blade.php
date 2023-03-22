@@ -3,7 +3,7 @@
         <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
             <div class="grid gap-4 lg:gap-6">
 
-                <form hx-post="/update_speaker/{{ $user->id }}" hx-trigger="submit" hx-target="#admin-functions" hx-swap="innerHTML" enctype="multipart/form-data">
+                <form hx-post="/update_speaker/{{ $user->id }}" hx-trigger="submit" hx-target="#parent-div" hx-swap="innerHTML" enctype="multipart/form-data">
                     @csrf
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
                         <div class="mt-2 space-y-2">
@@ -80,9 +80,9 @@
                         </button>
 
                         <div class="mt-6 grid">
-                            <button type="button" class="py-3 px-4 block w-full rounded-md border rounded-md bg-gray-200 hover:bg-gray-300 border border-transparent text-sm lg:text-base text-gray-700 font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition">
+                            <a hx-boost="true" href='/conference_list' class="py-3 px-4 block w-full rounded-md border rounded-md bg-gray-200 hover:bg-gray-300 border border-transparent text-sm lg:text-base text-gray-700 font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition">
                                 Cancel
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </form>

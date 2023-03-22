@@ -2,23 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\AdminAccessRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class AdminAccessController extends Controller
 {
-    public function signIn()
+    public function signIn(Request $request)
     {
-        /*         $user = $request->input('email');
+        $credentials = $request->validate([
+            'email' => 'required|email|exists:admins,email',
+            'password' => 'required'
+        ]);
 
-        auth()->login($user); */
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect('/conference_list')->with('success', 'Welcome!');
+        }
 
-        return redirect('/conference_list')->with('success', 'Welcome motherfucker. Enjoy!');
+        return back()->withErrors([
+            'password' => 'The provided password does not match our records.',
+        ]);
     }
 
-    public function signOut()
+    public function signOut(Request $request)
     {
-        /*         auth()->logout();
- */
+        auth()->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
         return redirect('/conference_list')->with('success', 'Adios');
     }
 }

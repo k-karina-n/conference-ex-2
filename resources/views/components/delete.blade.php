@@ -22,10 +22,10 @@
 
           <div class="grow">
             <h3 class="mb-2 text-xl font-bold text-gray-800 dark:text-gray-200">
-              Delete Personal Account
+              Delete Speaker
             </h3>
             <p class="text-gray-500">
-              Permanently remove your Personal Account and all of its contents from the Vercel platform. This action is not reversible, so please continue with caution.
+              Are you sure?
             </p>
           </div>
         </div>
@@ -35,8 +35,8 @@
         <button type="button" class="py-2.5 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800" data-hs-overlay="#hs-danger-alert">
           Cancel
         </button>
-        <a class="py-2.5 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-600 text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800" href="#">
-          Delete personal account
+        <a class="py-2.5 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-red-600 text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+          Delete
         </a>
       </div>
     </div>

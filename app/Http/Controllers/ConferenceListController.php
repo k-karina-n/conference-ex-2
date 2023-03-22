@@ -24,12 +24,22 @@ class ConferenceListController extends Controller
         $date = date('Y-m-d');
 
         return view('conference-list', [
-            'conferences' => Conference::where('date', '>=', $date)
-                ->with('user')
-                ->orderByDesc('date')
+            'conferences' => Conference::with('user')
                 ->paginate(5),
         ]);
     }
+
+    /*     public function table(): View
+    {
+        $date = date('Y-m-d');
+
+        return view('table-body', [
+            'conferences' => Conference::where('date', '>=', $date)
+                ->with('user')
+                ->orderBy('date')
+                ->paginate(5),
+        ]);
+    } */
 
     /* [ Functuanility for auth user only ] */
 
@@ -40,11 +50,12 @@ class ConferenceListController extends Controller
     {
         $service->store($request);
 
-        return redirect('/conference_list')->with('success', 'New speaker has been created!');
+        return redirect('/table_body')->with('success', 'New speaker has been created!');
+        //return response('', 200)->header('HX-Location', '/focus');
     }
 
     /**
-     * Show the form for editing the speaker info with all data.
+     * Show the form for editing the speaker info with retrieved data.
      */
     public function edit($id)
     {
@@ -58,7 +69,7 @@ class ConferenceListController extends Controller
     }
 
     /**
-     * Update the specified conference in DB.
+     * Update the specified speaker info in DB.
      */
     public function update(Request $request, $id)
     {
@@ -91,16 +102,16 @@ class ConferenceListController extends Controller
             $user->conferences->save();
         }
 
-        return redirect('/conference_list')->with('success', 'Info has been changed!');
+        return response('', 200)->header('HX-Location', '/conference_list');
     }
 
     /**
-     * Remove the specified conference from DB.
+     * Remove the specified speaker from DB.
      */
     public function destroy($id)
     {
         /* User::find($id)->delete(); */
 
-        return redirect('/conference_list')->with('success', 'Speaker has been deleted');
+        return redirect('/table_body')->with('success', 'Speaker has been deleted');
     }
 }
