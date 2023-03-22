@@ -112,6 +112,7 @@
 
                                     <td class="h-px w-px whitespace-nowrap"></td>
 
+                                    @auth
                                     @php($id = $conference->user->id)
                                     <td class="h-px w-px whitespace-nowrap">
                                         <div class="px-6 py-1.5">
@@ -128,7 +129,7 @@
                                             </button>
                                         </div>
                                     </td>
-                                    {{-- @endauth --}}
+                                    @endauth
                                 </tr>
                                 @endforeach
                             </tbody>

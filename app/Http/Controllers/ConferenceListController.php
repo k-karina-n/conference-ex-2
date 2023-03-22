@@ -84,6 +84,9 @@ class ConferenceListController extends Controller
             $user->photo = $photoPath;
         }
 
+        /* $user->update($request->validated());
+        $user->conference->update($request->validated()); */
+
         $user->firstName = ucfirst($request->input('firstName'));
         $user->lastName = ucfirst($request->input('lastName'));
         $user->phone = $request->input('phone');
@@ -94,12 +97,12 @@ class ConferenceListController extends Controller
             $user->save();
         }
 
-        $user->conferences->title = ucwords($request->input('title'));
-        $user->conferences->description = $request->input('description');
-        $user->conferences->date = $request->input('date');
+        $user->conference->title = ucwords($request->input('title'));
+        $user->conference->description = $request->input('description');
+        $user->conference->date = $request->input('date');
 
-        if ($user->conferences->isDirty()) {
-            $user->conferences->save();
+        if ($user->conference->isDirty()) {
+            $user->conference->save();
         }
 
         return response('', 200)->header('HX-Location', '/conference_list');

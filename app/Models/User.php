@@ -45,7 +45,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function conferences(): HasOne
+    public function conference(): HasOne
     {
         return $this->hasOne(Conference::class);
     }

@@ -55,14 +55,14 @@
                     <div class="mt-2 space-y-2">
                         <label for="title" class="block text-sm text-gray-700 font-medium">Conference title</label>
                         <div class="mt-2 space-y-2">
-                            <input id="title" name="title" type="text" value="{{ $user->conferences->title }}" class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500" required>
+                            <input id="title" name="title" type="text" value="{{ $user->conference->title }}" class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500" required>
                         </div>
                     </div>
 
                     <div class="mt-2 space-y-2">
                         <label for="description" class="block text-sm text-gray-700 font-medium">Conference decription</label>
                         <div class="mt-2 space-y-2">
-                            <textarea id="description" name="description" type="text" class="py-3 px-4 block w-full rounded-md border border-grcharactersay-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500" rows="3" maxlength="1000" required>{{ $user->conferences->description }}</textarea>
+                            <textarea id="description" name="description" type="text" class="py-3 px-4 block w-full rounded-md border border-grcharactersay-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500" rows="3" maxlength="1000" required>{{ $user->conference->description }}</textarea>
                         </div>
                     </div>
 
@@ -70,7 +70,7 @@
                         <label for="date" class="block text-sm text-gray-700 font-medium">Date</label>
                         <div class="mt-2 space-y-2">
                             @php($date = date('Y-m-d'))
-                            <input type="date" name="date" id="date" value="{{ $user->conferences->date }}" min="{{ $date }}" class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500">
+                            <input type="date" name="date" id="date" value="{{ $user->conference->date }}" min="{{ $date }}" class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500">
                         </div>
                     </div>
 
