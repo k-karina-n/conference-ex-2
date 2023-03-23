@@ -31,18 +31,25 @@ class ConferenceListController extends Controller
     /**
      * Save a new created conference to DB.
      */
-    public function save(ConferenceRequest $request, RegistrationFormService $service)
+    public function save(ConferenceRequest $request, RegistrationFormService $service): RedirectResponse
     {
         $service->store($request);
 
         return redirect('/conference_list')->with('success', 'New speaker has been created!');
-        //return response('', 200)->header('HX-Location', '/focus');
+    }
+
+    /**
+     * Return admin back in case of failed validation
+     */
+    public function change(): View
+    {
+        return view('adminPartials/add');
     }
 
     /**
      * Show the form for editing the speaker info with retrieved data.
      */
-    public function edit($id)
+    public function edit($id): View
     {
         $user = User::find($id);
 

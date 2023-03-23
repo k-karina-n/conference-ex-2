@@ -23,8 +23,16 @@ class ConferenceRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'firstName' => 'required|string|max:255',
+            'lastName' => 'required|string|max:255',
+            'phone' => 'required',
             'email' => 'required|email|unique:users',
-            'file' => 'required|mimes:png,jpg,jpeg|max:2048'
+            'country' => 'required',
+            'file' => 'required|mimes:png,jpg,jpeg|max:2048',
+
+            'title' => 'required',
+            'description' => 'required|max:1000',
+            'date' => 'required|after_or_equal:today'
         ];
     }
 }

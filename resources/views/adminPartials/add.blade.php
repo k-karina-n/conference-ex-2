@@ -9,17 +9,17 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
                         <div class="mt-2 space-y-2">
                             <label for="firstName" class="block text-sm text-gray-700 font-medium">First Name</label>
-                            <input type="text" name="firstName" id="firstName" class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500" required>
+                            <input type="text" name="firstName" id="firstName" class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500">
                         </div>
 
                         <div class="mt-2 space-y-2">
                             <label for="lastName" class="block text-sm text-gray-700 font-medium">Last Name</label>
-                            <input type="text" name="lastName" id="lastName" class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500" required>
+                            <input type="text" name="lastName" id="lastName" class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500">
                         </div>
 
                         <div class="mt-2 space-y-2">
                             <label for="phone" class="block text-sm text-gray-700 font-medium">Phone number</label>
-                            <input type="tel" name="phone" id="phone" x-data x-mask="+99 (999) 999-9999" placeholder="+NN (NNN) NNN-NNNN" class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500" required>
+                            <input type="tel" name="phone" id="phone" x-data x-mask="+99 (999) 999-9999" placeholder="+NN (NNN) NNN-NNNN" class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500">
                         </div>
 
                         <div class="mt-2 space-y-2">
@@ -33,7 +33,7 @@
 
                     <div class="mt-2 space-y-2">
                         <label for="country" class="block text-sm text-gray-700 font-medium">Country</label>
-                        <select id="country" name="country" autocomplete="country-name" class="py-3 px-4 block w-full rounded-md border border-gray-200 bg-white py-2 px-3 shadow-sm text-sm hover:border-blue-500 focus:border-indigo-500 focus:ring-indigo-500" required>
+                        <select id="country" name="country" autocomplete="country-name" class="py-3 px-4 block w-full rounded-md border border-gray-200 bg-white py-2 px-3 shadow-sm text-sm hover:border-blue-500 focus:border-indigo-500 focus:ring-indigo-500">
                             <option value="" selected disabled hidden>Choose here</option>
                             <option>United Kingdom</option>
                             <option>Germany</option>
@@ -56,21 +56,20 @@
                                         file:bg-transparent file:border-0
                                         file:bg-gray-100 file:mr-4
                                         file:py-3 file:px-4
-                                       " required>
+                                       ">
                     </div>
 
                     <div class="mt-2 space-y-2">
                         <label for="title" class="block text-sm text-gray-700 font-medium">Conference title</label>
                         <div class="mt-2 space-y-2">
-                            <input id="title" name="title" type="text" class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500" placeholder="Topic" required>
+                            <input id="title" name="title" type="text" class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500" placeholder="Topic">
                         </div>
                     </div>
 
                     <div class="mt-2 space-y-2">
                         <label for="description" class="block text-sm text-gray-700 font-medium">Conference decription</label>
                         <div class="mt-2 space-y-2">
-                            <textarea id="description" name="description" type="text" class="py-3 px-4 block w-full rounded-md border border-grcharactersay-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500" rows="3" placeholder="Description (up to 1000 characters)" maxlength="1000" required>
-                                </textarea>
+                            <textarea id="description" name="description" type="text" class="py-3 px-4 block w-full rounded-md border border-grcharactersay-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500" rows="3" placeholder="Description (up to 1000 characters)" maxlength="1000"></textarea>
                         </div>
                     </div>
 
@@ -78,7 +77,7 @@
                         <label for="date" class="block text-sm text-gray-700 font-medium">Date</label>
                         <div class="mt-2 space-y-2">
                             @php($date = date('Y-m-d'))
-                            <input type="date" name="date" id="date" min="{{ $date }}" class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500" required>
+                            <input type="date" name="date" id="date" min="{{ $date }}" class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500">
                         </div>
                     </div>
 
@@ -88,7 +87,7 @@
                         </button>
 
                         <div class="mt-6 grid">
-                            <button hx-get="/table_body" class="py-3 px-4 block w-full rounded-md border rounded-md bg-gray-200 hover:bg-gray-300 border border-transparent text-sm lg:text-base text-gray-700 font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition">
+                            <button hx-get="/conference_list" class="py-3 px-4 block w-full rounded-md border rounded-md bg-gray-200 hover:bg-gray-300 border border-transparent text-sm lg:text-base text-gray-700 font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition">
                                 Cancel
                             </button>
                         </div>

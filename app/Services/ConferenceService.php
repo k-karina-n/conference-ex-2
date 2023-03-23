@@ -2,13 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\User;
+
 class ConferenceService
 {
-    public function auth($request)
-    {
-    }
-
-    public function logout($request)
-    {
-    }
 }
