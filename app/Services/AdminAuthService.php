@@ -13,14 +13,7 @@ class AdminAuthService
             'password' => $request->password
         ];
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect('/conference_list')->with('success', 'Welcome to Admin Mode!');
-        }
-
-        return back()->withErrors([
-            'password' => 'The provided password does not match our records.',
-        ]);
+        return Auth::attempt($credentials);
     }
 
     public function logout($request)
@@ -29,7 +22,5 @@ class AdminAuthService
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-
-        return redirect('/conference_list')->with('success', 'Adios');
     }
 }

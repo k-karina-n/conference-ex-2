@@ -6,6 +6,7 @@ use Illuminate\View\View;
 use App\Models\Conference;
 use App\Models\User;
 use App\Http\Requests\ConferenceRequest;
+use App\Services\ConferenceService;
 use App\Services\RegistrationFormService;
 
 

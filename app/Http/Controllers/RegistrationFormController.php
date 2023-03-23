@@ -17,8 +17,8 @@ class RegistrationFormController extends Controller
      * Store info from registration form to DB
      * 
      * @param
-     * $RegistrationFormRequest - validated data
-     * $RegistrationFormService - store data to DB
+     * RegistrationFormRequest - validated data
+     * RegistrationFormService - store data to DB
      * 
      * @return View 
      * Congratulation with succesful registreation 
