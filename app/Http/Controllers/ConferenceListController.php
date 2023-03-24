@@ -51,13 +51,16 @@ class ConferenceListController extends Controller
      */
     public function edit($id): View
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
 
         $countries = ['United Kingdom', 'Poland', 'Germany', 'United States', 'China', 'Japan', 'Ukraine'];
         array_unshift($countries, $user->country);
         $countries = array_unique($countries);
 
-        return view('adminPartials/edit', compact('user', 'countries'));
+        return view('adminPartials/edit', [
+            'user' => $user,
+            'countries' => $countries
+        ]);
     }
 
     /**
