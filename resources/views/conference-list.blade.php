@@ -40,113 +40,61 @@
                             <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                                 <thead class="bg-gray-50 dark:bg-slate-800">
                                     <tr>
-                                        <th scope="col" class="pl-6 py-3 text-left">
-                                            <div class="flex items-center gap-x-2">
-                                                <span
-                                                    class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                                                    Photo
-                                                </span>
-                                            </div>
-                                        </th>
-
-                                        <th scope="col" class="px-6 py-3 text-left">
-                                            <div class="flex items-center gap-x-2">
-                                                <span
-                                                    class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                                                    Name
-                                                </span>
-                                            </div>
-                                        </th>
-
-                                        <th scope="col" class="px-6 py-3 text-left">
-                                            <div class="flex items-center gap-x-2">
-                                                <span
-                                                    class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                                                    Conference title
-                                                </span>
-                                            </div>
-                                        </th>
-
-                                        <th scope="col" class="px-6 py-3 text-left">
-                                            <div class="flex items-center gap-x-2">
-                                                <span
-                                                    class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                                                    Date
-                                                </span>
-                                            </div>
-                                        </th>
-                                        <th scope="col" class="px-6 py-3 text-right"></th>
+                                        <x-table.head-item item="Photo" />
+                                        <x-table.head-item item="Name" />
+                                        <x-table.head-item item="Conference Title" />
+                                        <x-table.head-item item="Date" />
                                     </tr>
                                 </thead>
 
                                 <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                                     @foreach ($conferences as $conference)
                                         <tr>
-                                            <td class="h-px w-px whitespace-nowrap">
-                                                <div class="pl-6 py-3">
-                                                    <img src="{{ asset('/userPhotos/' . $conference->user->photo) }}"
-                                                        id="photo" alt="photo"
-                                                        class="inline-block h-[2.875rem] w-[2.875rem] rounded-md ring-2 ring-white">
-                                                </div>
-                                            </td>
+                                            <x-table.body-item>
+                                                <img src="{{ asset('/userPhotos/' . $conference->user->photo) }}"
+                                                    id="photo" alt="photo"
+                                                    class="inline-block h-[2.875rem] w-[2.875rem] rounded-md ring-2 ring-white">
+                                            </x-table.body-item>
 
-                                            <td class="h-px w-px whitespace-nowrap">
-                                                <div class="pl-6 lg:pl-3 xl:pl-0 pr-6 py-3">
-                                                    <div class="flex items-center gap-x-3">
-                                                        <div class="grow">
-                                                            <span
-                                                                class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
-                                                                {{ $conference->user->firstName }}
-                                                                {{ $conference->user->lastName }}
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
+                                            <x-table.body-item>
+                                                <span class="text-sm text-gray-800 font-semibold">
+                                                    {{ $conference->user->firstName }}
+                                                    {{ $conference->user->lastName }}
+                                                </span>
+                                            </x-table.body-item>
 
-                                            <td class="h-px w-72 whitespace-nowrap">
-                                                <div class="px-6 py-3">
-                                                    <span
-                                                        class="block text-sm font-semibold text-gray-800 dark:text-gray-200">
-                                                        {{ $conference->title }}
-                                                    </span>
-                                                </div>
-                                            </td>
+                                            <x-table.body-item>
+                                                <span class="text-sm text-gray-800 font-semibold">
+                                                    {{ $conference->title }}
+                                                </span>
+                                            </x-table.body-item>
 
-                                            <td class="h-px w-px whitespace-nowrap">
-                                                <div class="px-6 py-3">
-                                                    <span class="text-sm text-gray-500">
-                                                        {{ $conference->date }}
-                                                    </span>
-                                                </div>
-                                            </td>
-
-                                            <td class="h-px w-px whitespace-nowrap"></td>
+                                            <x-table.body-item>
+                                                <span class="text-sm text-gray-500">
+                                                    {{ $conference->date }}
+                                                </span>
+                                            </x-table.body-item>
 
                                             @auth
                                                 @php($id = $conference->user->id)
-                                                <td class="h-px w-px whitespace-nowrap">
-                                                    <div class="px-6 py-1.5">
-                                                        <button hx-get="/edit_speaker/{{ $id }}"
-                                                            hx-target="#parent-div"
-                                                            class="inline-flex items-center gap-x-1.5 text-sm text-blue-600 decoration-2 hover:underline font-medium">
-                                                            Edit
-                                                        </button>
-                                                    </div>
-                                                </td>
+                                                <x-table.body-item>
+                                                    <button hx-get="/edit_speaker/{{ $id }}"
+                                                        hx-target="#parent-div"
+                                                        class="inline-flex items-center gap-x-1.5 text-sm text-blue-600 decoration-2 hover:underline font-medium">
+                                                        Edit
+                                                    </button>
+                                                </x-table.body-item>
 
-                                                <td class="h-px w-px whitespace-nowrap">
-                                                    <div class="px-6 py-1.5">
-                                                        <x-modal-delete :id=$id>
-                                                            <x-slot name="trigger">
-                                                                <button @click="on = true"
-                                                                    class="inline-flex items-center gap-x-1.5 text-sm text-blue-600 decoration-2 hover:underline font-medium">
-                                                                    Delete
-                                                                </button>
-                                                            </x-slot>
-                                                        </x-modal-delete>
-                                                    </div>
-                                                </td>
+                                                <x-table.body-item>
+                                                    <x-modal-delete path="/delete_speaker/{{ $id }}">
+                                                        <x-slot name="trigger">
+                                                            <button @click="on = true"
+                                                                class="inline-flex items-center gap-x-1.5 text-sm text-blue-600 decoration-2 hover:underline font-medium">
+                                                                Delete
+                                                            </button>
+                                                        </x-slot>
+                                                    </x-modal-delete>
+                                                </x-table.body-item>
                                             @endauth
                                         </tr>
                                     @endforeach
