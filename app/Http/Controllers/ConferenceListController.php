@@ -59,7 +59,7 @@ class ConferenceListController extends Controller
 
         return view('adminPartials/edit', [
             'user' => $user,
-            'countries' => $countries
+            'countries' => $countries,
         ]);
     }
 
@@ -68,7 +68,7 @@ class ConferenceListController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
 
         if ($request->file) {
 
@@ -106,9 +106,9 @@ class ConferenceListController extends Controller
     /**
      * Remove the specified speaker from DB.
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        $user->delete();
+        //User::destroy($id);
 
         return redirect('/conference_list')->with('success', 'Speaker has been deleted');
     }
