@@ -10,23 +10,23 @@ use App\Http\Controllers\AdminAuthController;
  Routes: Registration Form Section
 */
 
-Route::resource('/', RegistrationFormController::class)
-    ->only(['index', 'store']);
+Route::get('/', [RegistrationFormController::class, 'index'])->name('register');
+Route::post('/', [RegistrationFormController::class, 'store']);
 
 Route::get('/edit', [RegistrationFormController::class, 'edit']);
 
 /*
  Routes: Conference List Section 
 */
-Route::get('/conference_list', [ConferenceListController::class, 'index']);
+Route::get('/conference_list', [ConferenceListController::class, 'index'])->name('conference');
 
 /*
  Routes: Log in/ Log Out Section 
 */
-Route::get('/login', [AdminAuthController::class, 'loginView'])->middleware('guest');
+Route::get('/login', [AdminAuthController::class, 'loginView'])->name('login')->middleware('guest');
 Route::post('/login', [AdminAuthController::class, 'login'])->middleware('guest');
 
-Route::get('/logout', [AdminAuthController::class, 'logoutView'])->middleware('auth');
+Route::get('/logout', [AdminAuthController::class, 'logoutView'])->name('logout')->middleware('auth');
 Route::post('/logout', [AdminAuthController::class, 'logout'])->middleware('auth');
 
 /*

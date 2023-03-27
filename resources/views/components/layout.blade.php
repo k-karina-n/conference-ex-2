@@ -19,9 +19,19 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
 </head>
 
+<x-navigation>
+    <x-nav-link route="register">Registration Form</x-nav-link>
+    <x-nav-link route="conference">Conference List</x-nav-link>
+    @auth
+        <x-nav-link route="logout">Log out</x-nav-link>
+    @else
+        <x-nav-link route="login">Log in</x-nav-link>
+    @endauth
+</x-navigation>
+
 <body class="h-full">
     <div class="min-h-full">
-    {{ $slot }}
+        {{ $slot }}
     </div>
 </body>
 
