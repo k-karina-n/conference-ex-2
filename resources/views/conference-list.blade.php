@@ -2,7 +2,7 @@
 
     <main id="parent-div" hx-boost="true">
 
-        <div class="px-6 py-4 md:flex justify-center border-t border-gray-200">
+        <div class="px-6 py-4 flex justify-center border-t border-gray-200">
             {{ $conferences->links() }}
         </div>
 
@@ -20,7 +20,6 @@
                                 <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200">
                                     Check Speakers Below
                                 </h2>
-
                                 @auth
                                     <div class="inline-flex gap-x-2">
                                         <button hx-get="/add_speaker" hx-trigger="click" hx-target="#parent-div"
@@ -34,7 +33,6 @@
                                         </button>
                                     </div>
                                 @endauth
-
                             </div>
                             <!-- End Header -->
 

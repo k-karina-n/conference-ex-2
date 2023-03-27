@@ -19,15 +19,15 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
 </head>
 
-<x-navigation>
-    <x-nav-link route="register">Registration Form</x-nav-link>
-    <x-nav-link route="conference">Conference List</x-nav-link>
+<x-navigation.navigation>
+    <x-navigation.link route="register">Registration Form</x-navigation.link>
+    <x-navigation.link route="conference">Conference List</x-navigation.link>
     @auth
-        <x-nav-link route="logout">Log out</x-nav-link>
+        <x-navigation.link route="logout">Log out</x-navigation.link>
     @else
-        <x-nav-link route="login">Log in</x-nav-link>
+        <x-navigation.link route="login">Log in</x-navigation.link>
     @endauth
-</x-navigation>
+</x-navigation.navigation>
 
 <body class="h-full">
     <div class="min-h-full">
