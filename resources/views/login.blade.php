@@ -1,5 +1,5 @@
 <x-layout>
-    <x-admin-access header="Get Admin Access" action="/login" button="Activate this super mode">
+    <x-admin.access header="Get Admin Access" action="/login" button="Activate this super mode">
 
         <div>
             <label for="email" class="block text-sm mb-2">Email address</label>
@@ -41,5 +41,5 @@
             @enderror
         </div>
 
-    </x-admin-access>
+    </x-admin.access>
 </x-layout>
