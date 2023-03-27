@@ -41,7 +41,7 @@ class ConferenceListController extends Controller
     /**
      * Return admin back in case of failed validation
      */
-    public function change(): View
+    public function add(): View
     {
         return view('adminPartials/add');
     }

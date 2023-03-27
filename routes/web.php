@@ -32,7 +32,7 @@ Route::post('/logout', [AdminAuthController::class, 'logout'])->middleware('auth
 /*
  Routes: Admin Functions 
 */
-Route::get('/add_speaker', [ConferenceListController::class, 'change']);
+Route::get('/add_speaker', [ConferenceListController::class, 'add']);
 Route::get('/edit_speaker/{id}', [ConferenceListController::class, 'edit']);
 
 Route::post('/save_new_speaker', [ConferenceListController::class, 'save']);
