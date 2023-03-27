@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\RegistrationFormController;
+use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ConferenceListController;
 use App\Http\Controllers\AdminAuthController;
 
@@ -10,10 +10,10 @@ use App\Http\Controllers\AdminAuthController;
  Routes: Registration Form Section
 */
 
-Route::get('/', [RegistrationFormController::class, 'index'])->name('register');
-Route::post('/', [RegistrationFormController::class, 'store']);
+Route::get('/', [RegistrationController::class, 'index'])->name('register');
+Route::post('/', [RegistrationController::class, 'store']);
 
-Route::get('/edit', [RegistrationFormController::class, 'edit']);
+Route::get('/edit', [RegistrationController::class, 'edit']);
 
 /*
  Routes: Conference List Section 

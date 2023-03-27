@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\View\View;
-use App\Http\Requests\RegistrationFormRequest;
-use App\Services\RegistrationFormService;
+use App\Http\Requests\RegistrationRequest;
+use App\Services\RegistrationService;
 
-class RegistrationFormController extends Controller
+class RegistrationController extends Controller
 {
     public function index(): View
     {
@@ -25,7 +25,7 @@ class RegistrationFormController extends Controller
      * &
      * Message with conference title to post on social media
      */
-    public function store(RegistrationFormRequest $request, RegistrationFormService $service): View
+    public function store(RegistrationRequest $request, RegistrationService $service): View
     {
         $service->store($request);
 

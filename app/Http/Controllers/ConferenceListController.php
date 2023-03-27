@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\View\View;
 use App\Models\Conference;
 use App\Models\User;
-use App\Http\Requests\ConferenceRequest;
+use App\Http\Requests\AddRequest;
 use App\Services\ConferenceService;
-use App\Services\RegistrationFormService;
+use App\Services\RegistrationService;
+use Illuminate\Support\Facades\Session;
+
 
 
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 
 
 class ConferenceListController extends Controller
@@ -29,21 +31,25 @@ class ConferenceListController extends Controller
     /* [ Functuanility for auth user only ] */
 
     /**
-     * Save a new created conference to DB.
-     */
-    public function save(ConferenceRequest $request, RegistrationFormService $service): RedirectResponse
-    {
-        $service->store($request);
-
-        return redirect('/conference_list')->with('success', 'New speaker has been created!');
-    }
-
-    /**
+     * Get the view to add a speakaer 
+     * &
      * Return admin back in case of failed validation
      */
     public function add(): View
     {
         return view('adminPartials/add');
+    }
+
+    /**
+     * Save a new created conference to DB.
+     */
+    public function save(AddRequest $request, RegistrationService $service): Response
+    {
+        $service->store($request);
+
+        Session::flash('success', 'New speaker has been created!');
+
+        return response('', 200)->header('HX-Location', '/conference_list');
     }
 
     /**
@@ -100,7 +106,9 @@ class ConferenceListController extends Controller
             $user->conference->save();
         }
 
-        return redirect('/conference_list')->with('success', 'Speaker has been updated');
+        Session::flash('success', 'Speaker has been updated!');
+
+        return response('', 200)->header('HX-Location', '/conference_list');
     }
 
     /**
@@ -108,8 +116,10 @@ class ConferenceListController extends Controller
      */
     public function destroy($id)
     {
-        //User::destroy($id);
+        User::destroy($id);
 
-        return redirect('/conference_list')->with('success', 'Speaker has been deleted');
+        Session::flash('success', 'Speaker has been deleted!');
+
+        return response('', 200)->header('HX-Location', '/conference_list');
     }
 }

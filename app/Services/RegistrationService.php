@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\User;
 
-class RegistrationFormService
+class RegistrationService
 {
     public function store($request)
     {
