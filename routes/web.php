@@ -10,30 +10,48 @@ use App\Http\Controllers\AdminAuthController;
  Routes: Registration Form Section
 */
 
-Route::get('/', [RegistrationController::class, 'index'])->name('register');
-Route::post('/', [RegistrationController::class, 'store']);
-
-Route::get('/edit', [RegistrationController::class, 'edit']);
+Route::controller(RegistrationController::class)->group(function () {
+    Route::get('/', 'index')->name('register');
+    Route::post('/', 'store');
+    Route::get('/edit', 'edit');
+});
 
 /*
  Routes: Conference List Section 
 */
-Route::get('/conference_list', [ConferenceListController::class, 'index'])->name('conference');
-/*
- Routes: Log in/ Log Out Section 
-*/
-Route::get('/login', [AdminAuthController::class, 'loginView'])->name('login')->middleware('guest');
-Route::post('/login', [AdminAuthController::class, 'login'])->middleware('guest');
-
-Route::get('/logout', [AdminAuthController::class, 'logoutView'])->name('logout')->middleware('auth');
-Route::post('/logout', [AdminAuthController::class, 'logout'])->middleware('auth');
+Route::get('/conference_list', [ConferenceListController::class, 'index'])
+    ->name('conference');
 
 /*
- Routes: Admin Functions 
+ Routes: Log in / Log out for admin
 */
-Route::get('/add_speaker', [ConferenceListController::class, 'add']);
-Route::get('/edit_speaker/{id}', [ConferenceListController::class, 'edit']);
+Route::controller(AdminAuthController::class)->group(function () {
+    Route::middleware(['guest'])->group(function () {
+        Route::get('/login', 'loginView')
+            ->name('login');
+        Route::post('/login', 'login');
+    });
 
-Route::post('/save_new_speaker', [ConferenceListController::class, 'save']);
-Route::post('/update_speaker/{id}', [ConferenceListController::class, 'update']);
-Route::get('/delete_speaker/{id}', [ConferenceListController::class, 'destroy']);
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/logout', 'logoutView')
+            ->name('logout');
+        Route::post('/logout', 'logout');
+    });
+});
+
+/*
+ Routes: Admin functions
+*/
+Route::middleware(['auth'])->group(function () {
+    Route::get('/add_speaker', [ConferenceListController::class, 'add']);
+    Route::get('/edit_speaker/{id}', [ConferenceListController::class, 'edit']);
+
+    Route::post('/save_new_speaker', [ConferenceListController::class, 'save']);
+    Route::post('/update_speaker/{id}', [ConferenceListController::class, 'update']);
+    Route::get('/delete_speaker/{id}', [ConferenceListController::class, 'destroy']);
+});
+
+/* Пыталась роутеры организовать, оставила две опции касательно админа, какая лучше? 
+Или все зависит от запроса? 
+Мне кажется там где указывается конкретно класс и метод удобнее, 
+ибо можно прям на название метода щелкнуть и перейти */

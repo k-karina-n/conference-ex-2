@@ -74,7 +74,7 @@ class ConferenceListController extends Controller
     /**
      * Update the specified speaker info in DB.
      */
-    public function update(Request $request, ConferenceService $service, $id)
+    public function update(UpdateRequest $request, ConferenceService $service, $id)
     {
         $user = User::findOrFail($id);
 

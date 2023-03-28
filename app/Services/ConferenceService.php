@@ -2,8 +2,6 @@
 
 namespace App\Services;
 
-use App\Models\User;
-
 class ConferenceService
 {
     public function update($request, $user)
