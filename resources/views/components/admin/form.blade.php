@@ -85,13 +85,6 @@
                                 class="py-3 px-4 block w-full rounded-md border rounded-md bg-blue-400 hover:bg-blue-500 border border-transparent text-sm lg:text-base text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition">
                                 {{ $button }}
                             </button>
-
-                            <div class="mt-6 grid">
-                                <button hx-get="/conference_list"
-                                    class="py-3 px-4 block w-full rounded-md border rounded-md bg-gray-200 hover:bg-gray-300 border border-transparent text-sm lg:text-base text-gray-700 font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition">
-                                    Cancel
-                                </button>
-                            </div>
                         </div>
                         @if ($errors->any())
                             <div class="text-red-500 text-m mt-2">

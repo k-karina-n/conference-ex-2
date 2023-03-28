@@ -19,7 +19,6 @@ Route::get('/edit', [RegistrationController::class, 'edit']);
  Routes: Conference List Section 
 */
 Route::get('/conference_list', [ConferenceListController::class, 'index'])->name('conference');
-
 /*
  Routes: Log in/ Log Out Section 
 */

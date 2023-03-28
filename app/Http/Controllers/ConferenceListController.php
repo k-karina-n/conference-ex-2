@@ -6,6 +6,8 @@ use Illuminate\View\View;
 use App\Models\Conference;
 use App\Models\User;
 use App\Http\Requests\AddRequest;
+use App\Http\Requests\UpdateRequest;
+
 use App\Services\ConferenceService;
 use App\Services\RegistrationService;
 use Illuminate\Support\Facades\Session;
@@ -72,39 +74,11 @@ class ConferenceListController extends Controller
     /**
      * Update the specified speaker info in DB.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, ConferenceService $service, $id)
     {
         $user = User::findOrFail($id);
 
-        if ($request->file) {
-
-            $photoPath = time() . '.' . $request->file->extension();
-
-            $request->file->move(public_path('userPhotos'), $photoPath);
-
-            $user->photo = $photoPath;
-        }
-
-        /* $user->update($request->validated());
-        $user->conference->update($request->validated()); */
-
-        $user->firstName = ucfirst($request->input('firstName'));
-        $user->lastName = ucfirst($request->input('lastName'));
-        $user->phone = $request->input('phone');
-        $user->email = $request->input('email');
-        $user->country = $request->input('country');
-
-        if ($user->isDirty()) {
-            $user->save();
-        }
-
-        $user->conference->title = ucwords($request->input('title'));
-        $user->conference->description = $request->input('description');
-        $user->conference->date = $request->input('date');
-
-        if ($user->conference->isDirty()) {
-            $user->conference->save();
-        }
+        $service->update($request, $user);
 
         Session::flash('success', 'Speaker has been updated!');
 
