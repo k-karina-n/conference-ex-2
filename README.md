@@ -10,18 +10,18 @@ What things you need to install the software and how to install them.
 Give examples
 
 ## Installing
-**Clone the repo**
+- **Clone the repo**
 ```
 git clone git@bitbucket.org:wappdev/study-koval-ex-2.git
 ```
 
-**Rename .env.example file to .env inside a project root and fill the following database information** 
+- **Rename .env.example file to .env inside a project root and fill the following database information** 
 ```
 DB_USERNAME= 
 DB_PASSWORD= 
 ```
 
-**Open the console and go to a project root directory**
+- **Open the console and go to a project root directory**
 ```
 cd study-koval-ex-2
 ```
@@ -42,7 +42,7 @@ php artisan key:generate
 php artisan migrate
 ```
 
-**Seed database with admin data** *['email' => 'admin@example.com', 'password' => 'adminadmin']*
+**Seed database with admin data** ['email' => 'admin@example.com', 'password' => 'adminadmin']
 ```
 php artisan db:seed
 ```
