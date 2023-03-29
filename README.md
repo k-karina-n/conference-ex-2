@@ -14,32 +14,39 @@ Give examples
 ```
 git clone git@bitbucket.org:wappdev/study-koval-ex-2.git
 ```
+
 **Rename .env.example file to .env inside a project root and fill the following database information** 
 ```
 DB_USERNAME= 
 DB_PASSWORD= 
 ```
+
 **Open the console and go to a project root directory**
 ```
 cd study-koval-ex-2
 ```
+
 **Create dependencies**
 ```
 composer install
 composer dump-autoload
 ```
+
 **Generate an application encryption key** 
 ```
 php artisan key:generate
 ```
+
 **Run database migrations** 
 ```
 php artisan migrate
 ```
+
 **Seed database with admin data** *['email' => 'admin@example.com', 'password' => 'adminadmin']*
 ```
 php artisan db:seed
 ```
+
 **Run project**
 ```
 php artisan serve
