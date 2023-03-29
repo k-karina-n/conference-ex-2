@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Log in & log out functions for admin.
 - Admin functions: add, update and delete (with flash message).
+- README.md
 
 ### Fixed 
 
