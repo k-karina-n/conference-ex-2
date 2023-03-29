@@ -10,26 +10,26 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
                             <x-admin.form-item for="firstName" label="First Name">
                                 <input type="text" name="firstName" id="firstName"
-                                    value="{{ $user->firstName ?? '' }}"
+                                    value="{{ $user->firstName ?? old('firstName') }}"
                                     class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500"
                                     required>
                             </x-admin.form-item>
 
                             <x-admin.form-item for="lastName" label="Last Name">
-                                <input type="text" name="lastName" id="lastName" value="{{ $user->lastName ?? '' }}"
+                                <input type="text" name="lastName" id="lastName" value="{{ $user->lastName ?? old('lastName') }}"
                                     class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500"
                                     required>
                             </x-admin.form-item>
 
                             <x-admin.form-item for="phone" label="Phone number">
                                 <input type="tel" name="phone" id="phone" x-data x-mask="+99 (999) 999-9999"
-                                    value="{{ $user->phone ?? '' }}" placeholder="+NN (NNN) NNN-NNNN"
+                                    value="{{ $user->phone ?? old('phone') }}" placeholder="+NN (NNN) NNN-NNNN"
                                     class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500"
                                     required>
                             </x-admin.form-item>
 
                             <x-admin.form-item for="email" label="Email">
-                                <input type="email" name="email" id="email" value="{{ $user->email ?? '' }}"
+                                <input type="email" name="email" id="email" value="{{ $user->email ?? old('email') }}"
                                     placeholder="example@email.com"
                                     class="peer py-3 px-4 block w-full rounded-md border border-gray-200 bg-white py-2 px-3 shadow-sm text-sm hover:border-blue-500 focus:border-indigo-500 focus:ring-indigo-500">
                                 <p class="mt-2 invisible peer-invalid:visible text-pink-600 text-sm">
@@ -41,7 +41,7 @@
                         <x-admin.form-item for="country" label="Country">
                             <select id="country" name="country" autocomplete="country-name"
                                 class="py-3 px-4 block w-full rounded-md border border-gray-200 bg-white py-2 px-3 shadow-sm text-sm hover:border-blue-500 focus:border-indigo-500 focus:ring-indigo-500"
-                                required>
+                                value="{{ old('country') }}" required>
                                 {{ $slot }} {{-- for custom country options --}}
                             </select>
                         </x-admin.form-item>
@@ -62,7 +62,7 @@
 
                         <x-admin.form-item for="title" label="Conference title">
                             <input id="title" name="title" type="text"
-                                value="{{ $user->conference->title ?? '' }}"
+                                value="{{ $user->conference->title ?? old('title') }}"
                                 class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500"
                                 placeholder="Topic">
                         </x-admin.form-item>
@@ -70,13 +70,13 @@
                         <x-admin.form-item for="description" label="Conference decription">
                             <textarea id="description" name="description" type="text"
                                 class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500"
-                                rows="3" placeholder="Description (up to 1000 characters)" maxlength="1000">{{ $user->conference->description ?? '' }}</textarea>
+                                rows="3" placeholder="Description (up to 1000 characters)" maxlength="1000">{{ $user->conference->description ?? old('description') }}</textarea>
                         </x-admin.form-item>
 
                         <x-admin.form-item for="date" label="Date">
                             @php($date = date('Y-m-d'))
                             <input type="date" name="date" id="date" min="{{ $date }}"
-                                value="{{ $user->conference->date ?? '' }}"
+                                value="{{ $user->conference->date ?? old('date') }}"
                                 class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500">
                         </x-admin.form-item>
 

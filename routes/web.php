@@ -44,7 +44,7 @@ Route::controller(AdminAuthController::class)->group(function () {
 */
 Route::middleware(['auth'])->group(function () {
     Route::get('/add_speaker', [ConferenceListController::class, 'add']);
-    Route::get('/edit_speaker/{id}', [ConferenceListController::class, 'edit']);
+    Route::get('/edit_speaker/{id}', [ConferenceListController::class, 'edit'])->name('edit_speaker');
 
     Route::post('/save_new_speaker', [ConferenceListController::class, 'save']);
     Route::post('/update_speaker/{id}', [ConferenceListController::class, 'update']);

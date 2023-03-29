@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
-use App\Models\Conference;
 use App\Models\User;
-use App\Http\Requests\AddRequest;
-use App\Http\Requests\UpdateRequest;
+use App\Models\Conference;
 
 use App\Services\ConferenceService;
 use App\Services\RegistrationService;
+
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
-
-
-use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Illuminate\Http\Response;
 
+use Illuminate\Http\Request;
 
 class ConferenceListController extends Controller
 {
@@ -33,20 +31,35 @@ class ConferenceListController extends Controller
     /* [ Functuanility for auth user only ] */
 
     /**
-     * Get the view to add a speakaer 
-     * &
-     * Return admin back in case of failed validation
+     * Get the Form view to add a speakaer 
      */
-    public function add(): View
+    public function add()
     {
         return view('adminPartials/add');
     }
 
     /**
-     * Save a new created conference to DB.
+     * Validate & save a new created conference to DB.
      */
-    public function save(AddRequest $request, RegistrationService $service): Response
+    public function save(Request $request, RegistrationService $service)
     {
+        $validator = Validator::make($request->all(), [
+            'firstName' => 'required|string|max:255',
+            'lastName' => 'required|string|max:255',
+            'phone' => 'required',
+            'email' => 'required|email|unique:users',
+            'country' => 'required',
+            'file' => 'required|mimes:png,jpg,jpeg|max:2048',
+
+            'title' => 'required',
+            'description' => 'required|max:1000',
+            'date' => 'required|after_or_equal:today'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/add_speaker')->withErrors($validator)->withInput();
+        }
+
         $service->store($request);
 
         Session::flash('success', 'New speaker has been created!');
@@ -67,16 +80,33 @@ class ConferenceListController extends Controller
 
         return view('adminPartials/edit', [
             'user' => $user,
-            'countries' => $countries,
+            'countries' => $countries
         ]);
     }
 
     /**
-     * Update the specified speaker info in DB.
+     * Validate & update the specified speaker info in DB.
      */
-    public function update(UpdateRequest $request, ConferenceService $service, $id)
+    public function update(Request $request, ConferenceService $service, $id)
     {
         $user = User::findOrFail($id);
+
+        $validator = Validator::make($request->all(), [
+            'firstName' => 'required|string|max:255',
+            'lastName' => 'required|string|max:255',
+            'phone' => 'required',
+            'email' => 'required|email',
+            'country' => 'required',
+            'file' => 'mimes:png,jpg,jpeg|max:2048',
+
+            'title' => 'required',
+            'description' => 'required|max:1000',
+            'date' => 'required|after_or_equal:today'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('edit_speaker', [$user])->withErrors($validator);
+        }
 
         $service->update($request, $user);
 
@@ -88,7 +118,7 @@ class ConferenceListController extends Controller
     /**
      * Remove the specified speaker from DB.
      */
-    public function destroy($id)
+    public function destroy($id): Response
     {
         User::destroy($id);
 

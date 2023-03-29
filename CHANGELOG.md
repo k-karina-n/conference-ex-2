@@ -12,13 +12,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Log in & log out functions for admin.
 - Admin functions: add, update and delete (with flash message).
 
-
 ### Fixed 
 
 - Reorganized views with blade components. 
-- Fixed modal-delete "blip". 
-- Fixed redirect to route '/conference' after admin functions. 
-- Reorganized routes.  -->
+- Fixed modal-delete "blip".
+- Fixed view display after redirection to route '/conference' (within admin functions). 
+- Reorganized routes.  
+- Fixed validation in admin function add (ConferenceList()->add()) to redirect back with inputs.
+- Fixed validation in admin function update (ConferenceList()->update()) to display validation errors.-->
 
 # [0.2.0] - 2023-03-21 
 
