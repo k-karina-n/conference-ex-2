@@ -7,6 +7,7 @@ These instructions will give you a copy of the project and running on your local
 
 ### Prerequisites
 To run this project locally, you need:
+
 - PHP >= 8.1.17
 - Laravel >= 10.3.1
 - Composer >= 2.5.4 
