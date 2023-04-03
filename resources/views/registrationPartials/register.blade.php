@@ -1,5 +1,5 @@
 <x-registration-layout header="Want to participate?" paragraph="Fill in the conference registration form">
-    <form hx-post="/" hx-trigger="submit" hx-target="#parent-div" hx-swap="innerHTML" enctype="multipart/form-data">
+    <form hx-post="/" hx-trigger="submit target:submit" hx-target="#parent-div" hx-swap="innerHTML" enctype="multipart/form-data">
         @csrf
         <div x-data="{
             form: {
@@ -14,8 +14,8 @@
                 date: $persist(''),
             }
         }">
-            <div x-data="{ currentStep: $persist('first') }">
-                <div x-show="currentStep === 'first'" x-transition:enter="transition duration-200 transform ease-out"
+            <div hx-boost="true" x-data="{ currentStep: $persist('first') }">
+                <div hx-get="/first" hx-trigger="click target:button" hx-swap="outerHTML" x-show="currentStep === 'first'" x-transition:enter="transition duration-200 transform ease-out"
                     x-transition:enter-start="scale-75" x-transition:leave="transition duration-100 transform ease-in"
                     x-transition:leave-end="opacity-0 scale-90">
 
@@ -80,11 +80,10 @@
                             <option>Japan</option>
                             <option>Ukraine</option>
                         </select>
-
                     </div>
 
                     <div class="mt-6 grid">
-                        <button type="button" @click="currentStep = 'second'"
+                        <button id="button" @if($errors->any()) @click="currentStep = 'second'" @endif
                             class="inline-flex justify-center items-center gap-x-3 text-center bg-blue-600 hover:bg-blue-700 border border-transparent text-sm lg:text-base text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4">
                             <div>
                                 <span>Next step</span>
@@ -108,7 +107,7 @@
                             file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3
                             file:px-4 @error('file') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror"
                             @error('file') autofocus @enderror
-                            {{-- required --}}>
+                            required>
                         @error('file')
                             <p class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</p>
                         @enderror
@@ -160,9 +159,8 @@
                             <span>Previous Step</span>
                         </button>
                     </div>
-
                     <div class="mt-6 grid">
-                        <button type="submit"
+                        <button type="submit" id="submit"
                             class="inline-flex justify-center items-center gap-x-3 text-center bg-blue-600 hover:bg-blue-700 border border-transparent text-sm lg:text-base text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4">
                             <span>Submit</span>
                         </button>

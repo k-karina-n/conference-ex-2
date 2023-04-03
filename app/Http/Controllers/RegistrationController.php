@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 use App\Http\Requests\RegistrationRequest;
 use App\Services\RegistrationService;
 
@@ -11,6 +14,23 @@ class RegistrationController extends Controller
     public function index(): View
     {
         return view('registration-form');
+    }
+
+    public function first(Request $request)
+    {
+        $validator = Validator::make($request->input(), [
+            'firstName' => 'required|string|max:255',
+            'lastName' => 'required|string|max:255',
+            'phone' => 'required',
+            'email' => 'required|email|unique:users',
+            'country' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/edit')->withErrors($validator)->withInput();
+        }
+
+        return view('registrationPartials/register');
     }
 
     /**
