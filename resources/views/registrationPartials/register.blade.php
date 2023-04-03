@@ -25,7 +25,8 @@
                                 Name</label>
                             <input type="text" name="firstName" id="firstName" x-model="form.firstName"
                                 class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1
-                                @error('firstName') border-pink-600 @enderror">
+                                @error('firstName') border-pink-600 @enderror"
+                                @error('firstName') x-data="{ error: true }" x-trap.inert="error" @enderror>
                             @error('firstName')
                                 <div class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</div>
                             @enderror
@@ -97,7 +98,8 @@
                     x-transition:leave-end="opacity-0 scale-90">
 
                     <div class="mt-2 space-y-2">
-                        <label for="file" class="flex text-sm {{ $errors->any() ? 'text-pink-700' : 'text-gray-700' }} font-medium">{{ $errors->any() ? 'Upload photo again' : 'Profile photo' }}</label>
+                        <label for="file"
+                            class="flex text-sm {{ $errors->any() ? 'text-pink-700' : 'text-gray-700' }} font-medium">{{ $errors->any() ? 'Upload photo again' : 'Profile photo' }}</label>
                         <input type="file" name="file" id="file"
                             class="block w-full border border-gray-200 shadow-sm rounded-md
                                         text-sm focus:z-10 
