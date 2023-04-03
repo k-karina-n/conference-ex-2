@@ -21,32 +21,45 @@
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
                         <div class="mt-2 space-y-2">
-                            <label for="firstName" class="block text-sm text-gray-700 font-medium">First
+                            <label for="firstName" class="flex text-sm text-gray-700 font-medium">First
                                 Name</label>
                             <input type="text" name="firstName" id="firstName" x-model="form.firstName"
-                                class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500">
+                                class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1
+                                @error('firstName') border-pink-600 @enderror">
+                            @error('firstName')
+                                <div class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mt-2 space-y-2">
-                            <label for="lastName" class="block text-sm text-gray-700 font-medium">Last
+                            <label for="lastName" class="flex text-sm text-gray-700 font-medium">Last
                                 Name</label>
                             <input type="text" name="lastName" id="lastName" x-model="form.lastName"
-                                class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500">
+                                class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1">
+                            @error('lastName')
+                                <div class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mt-2 space-y-2">
-                            <label for="phone" class="block text-sm text-gray-700 font-medium">Phone
+                            <label for="phone" class="flex text-sm text-gray-700 font-medium">Phone
                                 number</label>
                             <input type="tel" name="phone" id="phone" x-model="form.phone" x-data
                                 x-mask="+99 (999) 999-9999" placeholder="+NN (NNN) NNN-NNNN"
-                                class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500">
+                                class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1">
+                            @error('phone')
+                                <div class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mt-2 space-y-2">
-                            <label for="email" class="block text-sm text-gray-700 font-medium">Email</label>
+                            <label for="email" class="flex text-sm text-gray-700 font-medium">Email</label>
                             <input type="email" name="email" id="email" x-model="form.email"
                                 placeholder="example@email.com"
-                                class="peer py-3 px-4 block w-full rounded-md border border-gray-200 bg-white py-2 px-3 shadow-sm text-sm hover:border-blue-500 focus:border-indigo-500 focus:ring-indigo-500">
+                                class="peer py-3 px-4 block w-full rounded-md border border-gray-200 bg-white py-2 px-3 shadow-sm text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1">
+                            @error('email')
+                                <div class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</div>
+                            @enderror
                             <p class="mt-2 invisible peer-invalid:visible text-pink-600 text-sm">
                                 Please provide a valid email address.
                             </p>
@@ -54,9 +67,10 @@
                     </div>
 
                     <div class="mt-2 space-y-2">
-                        <label for="country" class="block text-sm text-gray-700 font-medium">Country</label>
+                        <label for="country" class="flex text-sm text-gray-700 font-medium">Country</label>
                         <select id="country" name="country" autocomplete="country-name" x-model="form.country"
-                            class="py-3 px-4 block w-full rounded-md border border-gray-200 bg-white py-2 px-3 shadow-sm text-sm hover:border-blue-500 focus:border-indigo-500 focus:ring-indigo-500">
+                            class="py-3 px-4 block w-full rounded-md border border-gray-200 bg-white py-2 px-3 shadow-sm text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1">
+                            <option value="" selected disabled hidden>Choose here</option>
                             <option>United Kingdom</option>
                             <option>Germany</option>
                             <option>Poland</option>
@@ -83,49 +97,57 @@
                     x-transition:leave-end="opacity-0 scale-90">
 
                     <div class="mt-2 space-y-2">
-                        <label class="block text-sm text-gray-700 font-medium">Profile Photo</label>
-                        <label for="file" class="sr-only">Choose file</label>
+                        <label for="file" class="flex text-sm {{ $errors->any() ? 'text-pink-700' : 'text-gray-700' }} font-medium">{{ $errors->any() ? 'Upload photo again' : 'Profile photo' }}</label>
                         <input type="file" name="file" id="file"
                             class="block w-full border border-gray-200 shadow-sm rounded-md
                                         text-sm focus:z-10 
                                         hover:border-blue-500
-                                        focus:border-blue-500 focus:ring-blue-500 
-                                       
-                                        file:bg-transparent file:border-0
-                                        file:bg-gray-100 file:mr-4
-                                        file:py-3 file:px-4
-                                       "
+                                        focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1
+                            file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3
+                            file:px-4"
                             required>
+                        @error('file')
+                            <div class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="mt-2 space-y-2">
-                        <label for="title" class="block text-sm text-gray-700 font-medium">Conference
+                        <label for="title" class="flex text-sm text-gray-700 font-medium">Conference
                             title</label>
                         <div class="mt-2 space-y-2">
                             <input id="title" name="title" type="text" x-model="form.title"
-                                class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500"
+                                class="peer-invalid:border-pink-600 py-3 px-4 block w-full rounded-md border rounded-md text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1"
                                 placeholder="Topic" required>
                         </div>
+                        @error('title')
+                            <div class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="mt-2 space-y-2">
-                        <label for="description" class="block text-sm text-gray-700 font-medium">Conference
-                            decription</label>
+                        <label for="description" class="flex text-sm text-gray-700 font-medium">Conference
+                            description</label>
                         <div class="mt-2 space-y-2">
                             <textarea id="description" name="description" type="text" x-model="form.description"
-                                class="py-3 px-4 block w-full rounded-md border border-grcharactersay-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500"
+                                class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1"
                                 rows="3" placeholder="Description (up to 1000 characters)" maxlength="1000" required></textarea>
                         </div>
+                        @error('description')
+                            <div class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="mt-2 space-y-2">
-                        <label for="date" class="block text-sm text-gray-700 font-medium">Date</label>
+                        <label for="date" class="flex text-sm text-gray-700 font-medium">Date</label>
                         <div class="mt-2 space-y-2">
                             @php($date = date('Y-m-d'))
                             <input type="date" name="date" id="date" x-model="form.date"
                                 min="{{ $date }}"
-                                class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500"
+                                class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1"
                                 required>
+                            @error('date')
+                                <div class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 
@@ -142,17 +164,6 @@
                             <span>Submit</span>
                         </button>
                     </div>
-
-                    @if ($errors->any())
-                        <div class="text-red-500 text-m mt-2">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
                 </div>
             </div>
         </div>

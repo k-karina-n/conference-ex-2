@@ -34,4 +34,7 @@
         </form>
     </div>
 
+    <script>
+        localStorage.clear();
+    </script>
 </x-registration-layout>

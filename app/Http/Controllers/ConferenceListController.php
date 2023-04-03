@@ -15,6 +15,8 @@ use Illuminate\View\View;
 use Illuminate\Http\Response;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+
 
 class ConferenceListController extends Controller
 {
@@ -95,7 +97,10 @@ class ConferenceListController extends Controller
             'firstName' => 'required|string|max:255',
             'lastName' => 'required|string|max:255',
             'phone' => 'required',
-            'email' => 'required|email',
+            'email' => [
+                'required',
+                Rule::unique('users')->ignore($user->id),
+            ],
             'country' => 'required',
             'file' => 'mimes:png,jpg,jpeg|max:2048',
 

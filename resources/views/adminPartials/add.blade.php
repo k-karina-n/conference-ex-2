@@ -1,6 +1,10 @@
 <x-admin.form path="/save_new_speaker" button="Add speaker">
 
-    <option value="" selected disabled hidden>Choose here</option>
+    @if (old('country'))
+        <option>{{ old('country') }}</option>
+    @else
+        <option value="" selected disabled hidden>Choose here</option>
+    @endif
     <option>United Kingdom</option>
     <option>Germany</option>
     <option>Poland</option>
