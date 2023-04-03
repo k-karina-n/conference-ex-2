@@ -18,7 +18,7 @@ class RegistrationController extends Controller
 
     public function first(Request $request)
     {
-        $validator = Validator::make($request->input(), [
+        $validator = Validator::make($request->all(), [
             'firstName' => 'required|string|max:255',
             'lastName' => 'required|string|max:255',
             'phone' => 'required',
@@ -26,8 +26,8 @@ class RegistrationController extends Controller
             'country' => 'required'
         ]);
 
-        if ($validator->fails()) {
-            return redirect('/edit')->withErrors($validator)->withInput();
+        if ($validator->stopOnFirstFailure()->fails()) {
+            return redirect('/edit')->withErrors($validator);
         }
 
         return view('registrationPartials/register');

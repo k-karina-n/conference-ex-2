@@ -12,7 +12,7 @@ use App\Http\Controllers\AdminAuthController;
 
 Route::controller(RegistrationController::class)->group(function () {
     Route::get('/', 'index')->name('register');
-    Route::get('/first', 'first');
+    Route::post('/first', 'first');
     Route::post('/', 'store');
     Route::get('/edit', 'edit');
 });

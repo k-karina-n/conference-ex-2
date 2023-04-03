@@ -1,5 +1,5 @@
 <x-registration-layout header="Want to participate?" paragraph="Fill in the conference registration form">
-    <form hx-post="/" hx-trigger="submit target:submit" hx-target="#parent-div" hx-swap="innerHTML" enctype="multipart/form-data">
+    <form hx-post="/" hx-trigger="submit" hx-target="#parent-div" hx-swap="innerHTML" enctype="multipart/form-data">
         @csrf
         <div x-data="{
             form: {
@@ -14,13 +14,13 @@
                 date: $persist(''),
             }
         }">
-            <div hx-boost="true" x-data="{ currentStep: $persist('first') }">
-                <div hx-get="/first" hx-trigger="click target:button" hx-swap="outerHTML" x-show="currentStep === 'first'" x-transition:enter="transition duration-200 transform ease-out"
+            <div x-data="{ currentStep: $persist('first') }">
+                <div x-show="currentStep === 'first'" x-transition:enter="transition duration-200 transform ease-out"
                     x-transition:enter-start="scale-75" x-transition:leave="transition duration-100 transform ease-in"
                     x-transition:leave-end="opacity-0 scale-90">
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
-                        <div class="mt-2 space-y-2">
+                        <div hx-post="/first" hx-trigger="change" class="mt-2 space-y-2">
                             <label for="firstName" class="flex text-sm text-gray-700 font-medium">First
                                 Name</label>
                             <input type="text" name="firstName" id="firstName" x-model="form.firstName"
@@ -35,8 +35,10 @@
                         <div class="mt-2 space-y-2">
                             <label for="lastName" class="flex text-sm text-gray-700 font-medium">Last
                                 Name</label>
-                            <input type="text" name="lastName" id="lastName" x-model="form.lastName"
-                                class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1 @error('lastName') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror">
+                            <input id="input" type="text" name="lastName" id="lastName" x-model="form.lastName"
+                                class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1 
+                                @error('lastName') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror"
+                                @error('lastName') autofocus @enderror>
                             @error('lastName')
                                 <p class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</p>
                             @enderror
@@ -45,9 +47,10 @@
                         <div class="mt-2 space-y-2">
                             <label for="phone" class="flex text-sm text-gray-700 font-medium">Phone
                                 number</label>
-                            <input type="tel" name="phone" id="phone" x-model="form.phone" x-data
+                            <input id="input" type="tel" name="phone" id="phone" x-model="form.phone" x-data
                                 x-mask="+99 (999) 999-9999" placeholder="+NN (NNN) NNN-NNNN"
-                                class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1 @error('phone') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror">
+                                class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1 @error('phone') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror"
+                                @error('phone') autofocus @enderror>
                             @error('phone')
                                 <p class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</p>
                             @enderror
@@ -55,13 +58,14 @@
 
                         <div class="mt-2 space-y-2">
                             <label for="email" class="flex text-sm text-gray-700 font-medium">Email</label>
-                            <input type="email" name="email" id="email" x-model="form.email"
+                            <input id="input" type="email" name="email" id="email" x-model="form.email"
                                 placeholder="example@email.com"
-                                class="peer py-3 px-4 block w-full rounded-md border border-gray-200 bg-white py-2 px-3 shadow-sm text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1 @error('email') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror">
+                                class="peer py-3 px-4 block w-full rounded-md border border-gray-200 bg-white py-2 px-3 shadow-sm text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1 @error('email') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror"
+                                @error('email') autofocus @enderror>
                             @error('email')
                                 <p class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</p>
                             @enderror
-                            <p class="mt-2 invisible peer-invalid:visible text-pink-600 text-sm">
+                            <p class="flex mt-2 invisible peer-invalid:visible text-pink-600 text-sm">
                                 Please provide a valid email address.
                             </p>
                         </div>
@@ -69,8 +73,9 @@
 
                     <div class="mt-2 space-y-2">
                         <label for="country" class="flex text-sm text-gray-700 font-medium">Country</label>
-                        <select id="country" name="country" autocomplete="country-name" x-model="form.country"
-                            class="py-3 px-4 block w-full rounded-md border border-gray-200 bg-white py-2 px-3 shadow-sm text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1 @error('country') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror">
+                        <select id="input" id="country" name="country" autocomplete="country-name" x-model="form.country"
+                            class="py-3 px-4 block w-full rounded-md border border-gray-200 bg-white py-2 px-3 shadow-sm text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1 @error('country') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror"
+                            @error('country') autofocus @enderror>
                             <option value="" selected disabled hidden>Choose here</option>
                             <option>United Kingdom</option>
                             <option>Germany</option>
@@ -80,10 +85,13 @@
                             <option>Japan</option>
                             <option>Ukraine</option>
                         </select>
+                        @error('country')
+                                <p class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</p>
+                            @enderror
                     </div>
 
                     <div class="mt-6 grid">
-                        <button id="button" @if($errors->any()) @click="currentStep = 'second'" @endif
+                        <button hx-post="/first" hx-trigger="mouseenter" @if(!$errors->any())  @click="currentStep = 'second'"  @endif
                             class="inline-flex justify-center items-center gap-x-3 text-center bg-blue-600 hover:bg-blue-700 border border-transparent text-sm lg:text-base text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4">
                             <div>
                                 <span>Next step</span>
