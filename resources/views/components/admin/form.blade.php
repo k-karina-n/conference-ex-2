@@ -11,7 +11,7 @@
                             <input type="text" name="firstName" id="firstName"
                                 value="{{ $user->firstName ?? old('firstName') }}"
                                 class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500
-                                    @error('firstName') border-pink-600 @enderror"
+                                    @error('firstName') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror"
                                 @error('firstName') autofocus @enderror required>
                             @error('firstName')
                                 <p class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</p>
@@ -22,7 +22,7 @@
                             <input type="text" name="lastName" id="lastName"
                                 value="{{ $user->lastName ?? old('lastName') }}"
                                 class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500
-                                @error('lastName') border-pink-600 @enderror"
+                                @error('lastName') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror"
                                 @error('lastName') autofocus @enderror required>
                             @error('lastName')
                                 <p class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</p>
@@ -33,7 +33,7 @@
                             <input type="tel" name="phone" id="phone" x-data x-mask="+99 (999) 999-9999"
                                 value="{{ $user->phone ?? old('phone') }}" placeholder="+NN (NNN) NNN-NNNN"
                                 class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500
-                                @error('phone') border-pink-600 @enderror"
+                                @error('phone') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror"
                                 @error('phone') autofocus @enderror required>
                             @error('phone')
                                 <p class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</p>
@@ -44,7 +44,7 @@
                             <input type="email" name="email" id="email"
                                 value="{{ $user->email ?? old('email') }}" placeholder="example@email.com"
                                 class="peer py-3 px-4 block w-full rounded-md border border-gray-200 bg-white py-2 px-3 shadow-sm text-sm hover:border-blue-500 focus:border-indigo-500 focus:ring-indigo-500
-                                @error('email') border-pink-600 @enderror"
+                                @error('email') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror"
                                 @error('email') autofocus @enderror>
                             @error('email')
                                 <p class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</p>
@@ -58,7 +58,7 @@
                     <x-admin.form-item for="country" label="Country">
                         <select id="country" name="country" autocomplete="country-name"
                             class="py-3 px-4 block w-full rounded-md border border-gray-200 bg-white py-2 px-3 shadow-sm text-sm hover:border-blue-500 focus:border-indigo-500 focus:ring-indigo-500
-                            @error('country') border-pink-600 @enderror"
+                            @error('country') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror"
                             @error('country') autofocus @enderror required>
                             {{ $slot }} {{-- for custom country options --}}
                             @error('country')
@@ -76,9 +76,9 @@
                         @endif>
                         <input type="file" name="file" id="file"
                             class="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500 file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 
-                                @error('photo') border-pink-600 @enderror"
-                            @error('photo') autofocus @enderror {{ $path == '/add_speaker' ? 'required' : '' }}>
-                        @error('photo')
+                                @error('file') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror"
+                            @error('file') autofocus @enderror {{ $path == '/add_speaker' ? 'required' : '' }}>
+                        @error('file')
                             <p class="flex
                             alert alert-danger mt-2 text-pink-600 text-sm">
                                 {{ $message }}</p>
@@ -89,7 +89,7 @@
                         <input id="title" name="title" type="text"
                             value="{{ $user->conference->title ?? old('title') }}" placeholder="Topic"
                             class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500 
-                            @error('title') border-pink-600 @enderror"
+                            @error('title') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror"
                             @error('title') autofocus @enderror required>
                         @error('title')
                             <p class="flex
@@ -100,7 +100,8 @@
 
                     <x-admin.form-item for="description" label="Conference decription">
                         <textarea id="description" name="description" type="text"
-                            class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500 @error('description') border-pink-600 @enderror"
+                            class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500 
+                            @error('description') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror"
                             @error('description') autofocus @enderror required rows="3" placeholder="Description (up to 1000 characters)"
                             maxlength="1000">{{ $user->conference->description ?? old('description') }}</textarea>
                         @error('description')
@@ -111,10 +112,10 @@
                     </x-admin.form-item>
 
                     <x-admin.form-item for="date" label="Date">
-                        @php($date = date('Y-m-d'))
-                        <input type="date" name="date" id="date" min="{{ $date }}"
+                        <input type="date" name="date" id="date" min="{{ date('Y-m-d') }}"
                             value="{{ $user->conference->date ?? old('date') }}"
-                            class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500 @error('date') border-pink-600 @enderror"
+                            class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500 
+                            @error('date') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror"
                             @error('date') autofocus @enderror required>
                         @error('date')
                             <p class="flex

@@ -25,10 +25,10 @@
                                 Name</label>
                             <input type="text" name="firstName" id="firstName" x-model="form.firstName"
                                 class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1
-                                @error('firstName') border-pink-600 @enderror"
-                                @error('firstName') x-data="{ error: true }" x-trap.inert="error" @enderror>
+                                @error('firstName') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror"
+                                @error('firstName') autofocus @enderror>
                             @error('firstName')
-                                <div class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</div>
+                                <p class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</p>
                             @enderror
                         </div>
 
@@ -36,9 +36,9 @@
                             <label for="lastName" class="flex text-sm text-gray-700 font-medium">Last
                                 Name</label>
                             <input type="text" name="lastName" id="lastName" x-model="form.lastName"
-                                class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1">
+                                class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1 @error('lastName') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror">
                             @error('lastName')
-                                <div class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</div>
+                                <p class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</p>
                             @enderror
                         </div>
 
@@ -47,9 +47,9 @@
                                 number</label>
                             <input type="tel" name="phone" id="phone" x-model="form.phone" x-data
                                 x-mask="+99 (999) 999-9999" placeholder="+NN (NNN) NNN-NNNN"
-                                class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1">
+                                class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1 @error('phone') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror">
                             @error('phone')
-                                <div class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</div>
+                                <p class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</p>
                             @enderror
                         </div>
 
@@ -57,9 +57,9 @@
                             <label for="email" class="flex text-sm text-gray-700 font-medium">Email</label>
                             <input type="email" name="email" id="email" x-model="form.email"
                                 placeholder="example@email.com"
-                                class="peer py-3 px-4 block w-full rounded-md border border-gray-200 bg-white py-2 px-3 shadow-sm text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1">
+                                class="peer py-3 px-4 block w-full rounded-md border border-gray-200 bg-white py-2 px-3 shadow-sm text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1 @error('email') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror">
                             @error('email')
-                                <div class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</div>
+                                <p class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</p>
                             @enderror
                             <p class="mt-2 invisible peer-invalid:visible text-pink-600 text-sm">
                                 Please provide a valid email address.
@@ -70,7 +70,7 @@
                     <div class="mt-2 space-y-2">
                         <label for="country" class="flex text-sm text-gray-700 font-medium">Country</label>
                         <select id="country" name="country" autocomplete="country-name" x-model="form.country"
-                            class="py-3 px-4 block w-full rounded-md border border-gray-200 bg-white py-2 px-3 shadow-sm text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1">
+                            class="py-3 px-4 block w-full rounded-md border border-gray-200 bg-white py-2 px-3 shadow-sm text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1 @error('country') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror">
                             <option value="" selected disabled hidden>Choose here</option>
                             <option>United Kingdom</option>
                             <option>Germany</option>
@@ -106,10 +106,11 @@
                                         hover:border-blue-500
                                         focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1
                             file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3
-                            file:px-4"
-                            required>
+                            file:px-4 @error('file') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror"
+                            @error('file') autofocus @enderror
+                            {{-- required --}}>
                         @error('file')
-                            <div class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</div>
+                            <p class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
 
@@ -118,11 +119,11 @@
                             title</label>
                         <div class="mt-2 space-y-2">
                             <input id="title" name="title" type="text" x-model="form.title"
-                                class="peer-invalid:border-pink-600 py-3 px-4 block w-full rounded-md border rounded-md text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1"
-                                placeholder="Topic" required>
+                                class="peer-invalid:border-pink-600 py-3 px-4 block w-full rounded-md border rounded-md text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1 @error('title') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror"
+                                @error('title') autofocus @enderror placeholder="Topic" required>
                         </div>
                         @error('title')
-                            <div class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</div>
+                            <p class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
 
@@ -131,24 +132,24 @@
                             description</label>
                         <div class="mt-2 space-y-2">
                             <textarea id="description" name="description" type="text" x-model="form.description"
-                                class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1"
-                                rows="3" placeholder="Description (up to 1000 characters)" maxlength="1000" required></textarea>
+                                class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1 @error('description') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror"
+                                @error('description') autofocus @enderror rows="3" placeholder="Description (up to 1000 characters)"
+                                maxlength="1000"></textarea>
                         </div>
                         @error('description')
-                            <div class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</div>
+                            <p class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <div class="mt-2 space-y-2">
                         <label for="date" class="flex text-sm text-gray-700 font-medium">Date</label>
                         <div class="mt-2 space-y-2">
-                            @php($date = date('Y-m-d'))
                             <input type="date" name="date" id="date" x-model="form.date"
-                                min="{{ $date }}"
-                                class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1"
-                                required>
+                                min="{{ date('Y-m-d') }}"
+                                class="py-3 px-4 block w-full rounded-md border border-gray-200 rounded-md text-sm hover:border-blue-500 focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1 @error('date') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror"
+                                @error('date') autofocus @enderror required>
                             @error('date')
-                                <div class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</div>
+                                <p class="flex alert alert-danger mt-2 text-pink-600 text-sm">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
