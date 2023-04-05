@@ -4,22 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Conference;
-
 use App\Services\ConferenceService;
 use App\Services\RegistrationService;
-
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-
 use Illuminate\View\View;
 use Illuminate\Http\Response;
-
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 
 class ConferenceListController extends Controller
 {
+    public function __construct(
+        protected RegistrationService $registrationService,
+        protected ConferenceService $conferenceService,
+    ) {
+    }
     /**
      * Show the conference list with all speakers.
      */
@@ -29,8 +30,6 @@ class ConferenceListController extends Controller
             'conferences' => Conference::with('user')->paginate(5),
         ]);
     }
-
-    /* [ Functuanility for auth user only ] */
 
     /**
      * Get the Form view to add a speakaer 
@@ -43,7 +42,7 @@ class ConferenceListController extends Controller
     /**
      * Validate & save a new created conference to DB.
      */
-    public function save(Request $request, RegistrationService $service)
+    public function save(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'firstName' => 'required|string|max:255',
@@ -62,7 +61,7 @@ class ConferenceListController extends Controller
             return redirect('/add_speaker')->withErrors($validator)->withInput();
         }
 
-        $service->store($request);
+        $this->registrationService->store($request);
 
         Session::flash('success', 'New speaker has been created!');
 
@@ -89,7 +88,7 @@ class ConferenceListController extends Controller
     /**
      * Validate & update the specified speaker info in DB.
      */
-    public function update(Request $request, ConferenceService $service, $id)
+    public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
 
@@ -113,7 +112,7 @@ class ConferenceListController extends Controller
             return redirect()->route('edit_speaker', [$user])->withErrors($validator);
         }
 
-        $service->update($request, $user);
+        $this->conferenceService->update($request, $user);
 
         Session::flash('success', 'Speaker has been updated!');
 

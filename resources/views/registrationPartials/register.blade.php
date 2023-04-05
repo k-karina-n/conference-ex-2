@@ -32,7 +32,7 @@
                             @enderror
                         </div>
 
-                        <div class="mt-2 space-y-2">
+                        <div hx-post="/first" hx-trigger="change" class="mt-2 space-y-2">
                             <label for="lastName" class="flex text-sm text-gray-700 font-medium">Last
                                 Name</label>
                             <input id="input" type="text" name="lastName" id="lastName" x-model="form.lastName"

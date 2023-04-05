@@ -56,7 +56,7 @@
                     </div>
 
                     <x-admin.form-item for="country" label="Country">
-                        <select id="country" name="country" autocomplete="country-name"
+                        <select id="country" name="country"
                             class="py-3 px-4 block w-full rounded-md border border-gray-200 bg-white py-2 px-3 shadow-sm text-sm hover:border-blue-500 focus:border-indigo-500 focus:ring-indigo-500
                             @error('country') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror"
                             @error('country') autofocus @enderror required>
@@ -67,13 +67,9 @@
                         </select>
                     </x-admin.form-item>
 
-                    <x-admin.form-item for="file" {{-- class="{{ $errors->any() ? 'text-pink-700' : '' }}"
-                        label="{{ $errors->any() ? 'Upload photo again' : 'Profile photo' }}" --}}
-                        @if ($errors->any())
-                        label="Upload photo again"
-                        @else
-                        label="Profile Photo"
-                        @endif>
+                    <x-admin.form-item for="file" class="{{ $errors->any() ? 'text-pink-700' : '' }}"
+                        label="{{ $errors->any() ? 'Upload photo again' : 'Profile photo' }}"
+                       >
                         <input type="file" name="file" id="file"
                             class="block w-full border border-gray-200 shadow-sm rounded-md text-sm focus:z-10 hover:border-blue-500 focus:border-blue-500 focus:ring-blue-500 file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 
                                 @error('file') border-pink-600 focus:border-pink-500 focus:ring-pink-500 focus:ring-1 @enderror"

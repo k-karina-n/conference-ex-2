@@ -5,17 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
 use App\Http\Requests\RegistrationRequest;
 use App\Services\RegistrationService;
 
 class RegistrationController extends Controller
 {
+    public function __construct(protected RegistrationService $service)
+    {
+    }
+
     public function index(): View
     {
         return view('registration-form');
     }
 
+    /**
+     * Validate data from first step of registration form 
+     */
     public function first(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -34,20 +40,11 @@ class RegistrationController extends Controller
     }
 
     /**
-     * Store info from registration form to DB
-     * 
-     * @param
-     * RegistrationFormRequest - validated data
-     * RegistrationFormService - store data to DB
-     * 
-     * @return View 
-     * Congratulation with succesful registreation 
-     * &
-     * Message with conference title to post on social media
+     * @return View Congratulation with successful registration and title for message to post on social media
      */
-    public function store(RegistrationRequest $request, RegistrationService $service): View
+    public function store(RegistrationRequest $request): View
     {
-        $service->store($request);
+        $this->service->store($request);
 
         return view('registrationPartials/congratulation', [
             'title' => ucwords($request->title),

@@ -6,9 +6,7 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ConferenceListController;
 use App\Http\Controllers\AdminAuthController;
 
-/*
- Routes: Registration Form Section
-*/
+// Routes: Registration Form Section
 
 Route::controller(RegistrationController::class)->group(function () {
     Route::get('/', 'index')->name('register');
@@ -17,15 +15,11 @@ Route::controller(RegistrationController::class)->group(function () {
     Route::get('/edit', 'edit');
 });
 
-/*
- Routes: Conference List Section 
-*/
+// Routes: Conference List Section 
 Route::get('/conference_list', [ConferenceListController::class, 'index'])
     ->name('conference');
 
-/*
- Routes: Log in / Log out for admin
-*/
+// Routes: Log in / Log out for admin
 Route::controller(AdminAuthController::class)->group(function () {
     Route::middleware(['guest'])->group(function () {
         Route::get('/login', 'loginView')
@@ -40,9 +34,7 @@ Route::controller(AdminAuthController::class)->group(function () {
     });
 });
 
-/*
- Routes: Admin functions
-*/
+// Routes: Admin functions
 Route::middleware(['auth'])->group(function () {
     Route::get('/add_speaker', [ConferenceListController::class, 'add']);
     Route::get('/edit_speaker/{id}', [ConferenceListController::class, 'edit'])->name('edit_speaker');
@@ -51,8 +43,3 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/update_speaker/{id}', [ConferenceListController::class, 'update']);
     Route::get('/delete_speaker/{id}', [ConferenceListController::class, 'destroy']);
 });
-
-/* Пыталась роутеры организовать, оставила две опции касательно админа, какая лучше? 
-Или все зависит от запроса? 
-Мне кажется там где указывается конкретно класс и метод удобнее, 
-ибо можно прям на название метода щелкнуть и перейти */
