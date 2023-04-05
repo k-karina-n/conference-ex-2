@@ -71,24 +71,28 @@ class ConferenceListController extends Controller
     /**
      * Show the form for editing the speaker info with retrieved data.
      */
-    public function edit($id): View
+    public function edit(int $id): View
     {
         $user = User::findOrFail($id);
 
-        $countries = ['United Kingdom', 'Poland', 'Germany', 'United States', 'China', 'Japan', 'Ukraine'];
-        array_unshift($countries, $user->country);
-        $countries = array_unique($countries);
-
         return view('adminPartials/edit', [
             'user' => $user,
-            'countries' => $countries
+            'countries' => $this->countries($user)
         ]);
+    }
+
+    public function countries(User $user)
+    {
+        $countries = ['United Kingdom', 'Poland', 'Germany', 'United States', 'China', 'Japan', 'Ukraine'];
+        array_unshift($countries, $user->country);
+
+        return array_unique($countries);
     }
 
     /**
      * Validate & update the specified speaker info in DB.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
         $user = User::findOrFail($id);
 
@@ -122,7 +126,7 @@ class ConferenceListController extends Controller
     /**
      * Remove the specified speaker from DB.
      */
-    public function destroy($id): Response
+    public function destroy(int $id): Response
     {
         User::destroy($id);
 
