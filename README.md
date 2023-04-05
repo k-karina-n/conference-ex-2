@@ -30,6 +30,11 @@ DB_PASSWORD=
 ```
 cd study-koval-ex-2
 ```
+**Install packages and bundle application's assets**
+```
+npm i
+npm run build
+```
 
 **Create dependencies**
 ```
