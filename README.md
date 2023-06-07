@@ -1,6 +1,6 @@
 # Virtual Conference [ Dev Exercise #2 ] 
 
-3-page website to register for a virtual conference with a CRUD admin panel. 
+3-page website to register for a virtual conference with a CRUD admin panel. Built with [HALT Stack](https://haltstack.dev/)
 
 ## Getting Started
 These instructions will give you a copy of the project and running on your local machine for development and testing purposes. 
@@ -30,11 +30,6 @@ DB_PASSWORD=
 ```
 cd study-koval-ex-2
 ```
-**Install packages and bundle application's assets**
-```
-npm i
-npm run build
-```
 
 **Create dependencies**
 ```
@@ -55,6 +50,12 @@ php artisan migrate
 **Seed database with admin data** ['email' => 'admin@example.com', 'password' => 'adminadmin']
 ```
 php artisan db:seed
+```
+
+**Install packages and bundle application's assets**
+```
+npm i
+npm run build
 ```
 
 **Run project**

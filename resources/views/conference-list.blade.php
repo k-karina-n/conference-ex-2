@@ -1,5 +1,4 @@
 <x-layout>
-
     <main id="parent-div" hx-boost="true">
 
         <div class="px-6 py-4 flex justify-center border-t border-gray-200">
@@ -12,18 +11,18 @@
                 <div class="-m-1.5 overflow-x-auto">
                     <div class="p-1.5 min-w-full inline-block align-middle">
                         <div
-                            class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-slate-900 dark:border-gray-700">
+                            class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
 
                             <!-- Header -->
                             <div
-                                class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-gray-700">
-                                <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200">
+                                class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200">
+                                <h2 class="text-xl font-semibold text-gray-800">
                                     Check Speakers Below
                                 </h2>
                                 @auth
                                     <div class="inline-flex gap-x-2">
                                         <button hx-get="/add_speaker" hx-trigger="click" hx-target="#parent-div"
-                                            class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                                            class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm">
                                             <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" width="16"
                                                 height="16" viewBox="0 0 16 16" fill="none">
                                                 <path d="M2.63452 7.50001L13.6345 7.5M8.13452 13V2" stroke="currentColor"
@@ -37,8 +36,8 @@
                             <!-- End Header -->
 
                             <!-- Table -->
-                            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                                <thead class="bg-gray-50 dark:bg-slate-800">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
                                     <tr>
                                         <x-table.head-item item="Photo" />
                                         <x-table.head-item item="Name" />
@@ -47,7 +46,7 @@
                                     </tr>
                                 </thead>
 
-                                <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                                <tbody class="divide-y divide-gray-200">
                                     @foreach ($conferences as $conference)
                                         <tr>
                                             <x-table.body-item>
