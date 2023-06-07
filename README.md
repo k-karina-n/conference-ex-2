@@ -17,7 +17,7 @@ To run this project locally, you need:
 ## Installing
 **Clone the repo**
 ```
-git clone git@bitbucket.org:wappdev/study-koval-ex-2.git
+git clone https://github.com/k-karina-n/conference-ex-2.git
 ```
 
 **Rename .env.example file to .env inside a project root and fill the following database information** 
@@ -28,7 +28,7 @@ DB_PASSWORD=
 
 **Open the console and go to a project root directory**
 ```
-cd study-koval-ex-2
+cd conference-ex-2
 ```
 
 **Create dependencies**
