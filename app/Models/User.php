@@ -45,6 +45,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Defines one-to-one relationship between User table & Conference table
+     * 
+     */
     public function conference(): HasOne
     {
         return $this->hasOne(Conference::class);

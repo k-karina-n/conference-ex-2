@@ -10,19 +10,24 @@ use App\Services\RegistrationService;
 
 class RegistrationController extends Controller
 {
-    public function __construct(protected RegistrationService $service)
-    {
-    }
-
+    /**
+     * Return the view for the main page with registration form. 
+     * 
+     * @return View
+     */
     public function index(): View
     {
         return view('registration-form');
     }
 
     /**
-     * Validate data from first step of registration form 
+     * Instant data validation from the first step of registration form 
+     * 
+     * @param Request $request
+     * 
+     * @return View or redirects user back 
      */
-    public function first(Request $request)
+    public function first(Request $request): View
     {
         $validator = Validator::make($request->all(), [
             'firstName' => 'required|string|max:255',
@@ -40,11 +45,16 @@ class RegistrationController extends Controller
     }
 
     /**
-     * @return View Congratulation with successful registration and title for message to post on social media
+     * Stores data and returns the next step of registration process
+     * 
+     * @param RegistrationRequest $request Validated data from registration form
+     * @param RegistrationService $service Stores user data in the database 
+     * 
+     * @return View congratulation with successful registration
      */
-    public function store(RegistrationRequest $request): View
+    public function store(RegistrationRequest $request, RegistrationService $service): View
     {
-        $this->service->store($request);
+        $service->store($request);
 
         return view('registrationPartials/congratulation', [
             'title' => ucwords($request->title),
@@ -52,7 +62,9 @@ class RegistrationController extends Controller
     }
 
     /**
-     * Return user back in case of failed validation
+     * Returns user back in case of failed validation
+     * 
+     * @return View
      */
     public function edit(): View
     {

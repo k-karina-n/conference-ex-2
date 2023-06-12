@@ -11,12 +11,21 @@ class Conference extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'title',
         'description',
         'date'
     ];
 
+    /**
+     * Defines one-to-one relationship between User table & Conference table
+     * 
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
