@@ -10,7 +10,9 @@ use Illuminate\View\View;
 class ConferenceListController extends Controller
 {
     /**
-     * Show the conference list with all speakers.
+     * Shows the conference list with all speakers.
+     * 
+     * @return View
      */
     public function __invoke(): View
     {

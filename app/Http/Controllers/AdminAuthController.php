@@ -10,18 +10,37 @@ use Illuminate\View\View;
 
 class AdminAuthController extends Controller
 {
-    public function __construct(protected AdminAuthService $admin)
+    /**
+     * Constructor method
+     *
+     * @param AdminAuthService $service Logs in / logs out Admin 
+     *
+     * @return void
+     */
+    public function __construct(protected AdminAuthService $service)
     {
     }
 
+    /**
+     * Returns login view 
+     *
+     * @return View
+     */
     public function loginView(): View
     {
         return view('login');
     }
 
-    public function login(AdminAuthRequest $request)
+    /**
+     * Logs in an admin
+     *
+     * @param AdminAuthRequest $request Validated data from login form
+     * 
+     * @return RedirectResponse 
+     */
+    public function login(AdminAuthRequest $request): RedirectResponse
     {
-        if ($this->admin->auth($request)) {
+        if ($this->service->auth($request)) {
             $request->session()->regenerate();
             return redirect('/conference_list')->with('success', 'Welcome to Admin Mode!');
         }
@@ -31,14 +50,26 @@ class AdminAuthController extends Controller
         ]);
     }
 
+    /**
+     * Returns logout view 
+     *
+     * @return View
+     */
     public function logoutView(): View
     {
         return view('logout');
     }
 
+    /**
+     * Logs out an admin
+     *
+     * @param Request $request
+     * 
+     * @return RedirectResponse 
+     */
     public function logout(Request $request): RedirectResponse
     {
-        $this->admin->logout($request);
+        $this->service->logout($request);
 
         return redirect('/conference_list')->with('success', 'Adios');
     }

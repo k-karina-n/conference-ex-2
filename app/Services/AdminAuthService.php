@@ -3,10 +3,19 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Http\Requests\AdminAuthRequest;
 
 class AdminAuthService
 {
-    public function auth($request)
+    /**
+     * Logs out an admin
+     *
+     * @param AdminAuthRequest $request Validated admin data
+     * 
+     * @return bool 
+     */
+    public function auth(AdminAuthRequest $request): bool
     {
         $credentials = [
             'email' => $request->email,
@@ -16,7 +25,14 @@ class AdminAuthService
         return Auth::attempt($credentials);
     }
 
-    public function logout($request)
+    /**
+     * Logs out an admin
+     *
+     * @param Request $request
+     * 
+     * @return void 
+     */
+    public function logout(Request $request): void
     {
         auth()->logout();
 

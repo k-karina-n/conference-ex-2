@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Services\ConferenceService;
-use App\Services\RegistrationService;
+use App\Services\UserService;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
@@ -15,24 +14,36 @@ use Illuminate\Validation\Rule;
 
 class AdminFunctionsController extends Controller
 {
+    /**
+     * Create a new instance of the class with the provided dependencies
+     * 
+     * @param UserService $service Stores and updates user data
+     * 
+     * @return void
+     */
     public function __construct(
-        protected RegistrationService $registrationService,
-        protected ConferenceService $conferenceService,
+        protected UserService $service,
     ) {
     }
 
     /**
-     * Get the Form view to add a speakaer 
+     * Returns the form to add a speakaer 
+     * 
+     * @return View
      */
-    public function add()
+    public function add(): View
     {
         return view('adminPartials/add');
     }
 
     /**
-     * Validate & save a new created conference to DB.
+     * Validates & saves a new created user with conference to DB.
+     * 
+     * @param Request $request
+     * 
+     * @return Response
      */
-    public function save(Request $request)
+    public function save(Request $request): Response
     {
         $validator = Validator::make($request->all(), [
             'firstName' => 'required|string|max:255',
@@ -51,7 +62,7 @@ class AdminFunctionsController extends Controller
             return redirect('/add_speaker')->withErrors($validator)->withInput();
         }
 
-        $this->registrationService->store($request);
+        $this->service->create($request);
 
         Session::flash('success', 'New speaker has been created!');
 
@@ -59,7 +70,11 @@ class AdminFunctionsController extends Controller
     }
 
     /**
-     * Show the form for editing the speaker info with retrieved data.
+     * Shows the form for editing the user info with retrieved data.
+     * 
+     * @param string $id User id
+     * 
+     * @return View
      */
     public function edit(int $id): View
     {
@@ -71,7 +86,14 @@ class AdminFunctionsController extends Controller
         ]);
     }
 
-    public function countries(User $user)
+    /**
+     * Puts user's country first in an array 
+     * 
+     * @param User $user User data from DB 
+     * 
+     * @return array
+     */
+    public function countries(User $user): array
     {
         $countries = ['United Kingdom', 'Poland', 'Germany', 'United States', 'China', 'Japan', 'Ukraine'];
         array_unshift($countries, $user->country);
@@ -80,9 +102,14 @@ class AdminFunctionsController extends Controller
     }
 
     /**
-     * Validate & update the specified speaker info in DB.
+     * Validates & updates the specified user info in DB.
+     * 
+     * @param Request $request 
+     * @param int $id User id
+     * 
+     * @return Response
      */
-    public function update(Request $request, int $id)
+    public function update(Request $request, int $id): Response
     {
         $user = User::findOrFail($id);
 
@@ -106,7 +133,7 @@ class AdminFunctionsController extends Controller
             return redirect()->route('edit_speaker', [$user])->withErrors($validator);
         }
 
-        $this->conferenceService->update($request, $user);
+        $this->service->update($request, $user);
 
         Session::flash('success', 'Speaker has been updated!');
 
@@ -114,7 +141,11 @@ class AdminFunctionsController extends Controller
     }
 
     /**
-     * Remove the specified speaker from DB.
+     * Deletes the specified user from DB.
+     * 
+     * @param int $id User id
+     * 
+     * @return Response
      */
     public function destroy(int $id): Response
     {

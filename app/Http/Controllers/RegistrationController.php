@@ -6,7 +6,7 @@ use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\RegistrationRequest;
-use App\Services\RegistrationService;
+use App\Services\UserService;
 
 class RegistrationController extends Controller
 {
@@ -48,13 +48,13 @@ class RegistrationController extends Controller
      * Stores data and returns the next step of registration process
      * 
      * @param RegistrationRequest $request Validated data from registration form
-     * @param RegistrationService $service Stores user data in the database 
+     * @param UserService $service Stores user data in the database 
      * 
      * @return View congratulation with successful registration
      */
-    public function store(RegistrationRequest $request, RegistrationService $service): View
+    public function store(RegistrationRequest $request, UserService $service): View
     {
-        $service->store($request);
+        $service->create($request);
 
         return view('registrationPartials/congratulation', [
             'title' => ucwords($request->title),
